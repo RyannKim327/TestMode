@@ -31,7 +31,7 @@ let setOptions = (opts) => {
 	options = {
 		listenEvents: opts.listenEvents || true,
 		selfListen: opts.selfListen || false,
-		markAsRead: opts.markAsRead || false
+		autoMarkRead: opts.autoMarkRead || false
 	}
 }
 
@@ -70,7 +70,7 @@ const start = () => {
 			commands.forEach(r => {
 				
 				let script = require("./script/" + r.script)
-				let reg = regex(prefix + r.data.query)
+				let reg = regex("^" + prefix + r.data.query + "$")
 				if(reg.test(body)){
 					if(r.data.hasArgs){
 						script(api, event, reg)

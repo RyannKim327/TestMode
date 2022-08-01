@@ -4,7 +4,7 @@ config.add("info", {
 	title: "Bot Information",
 	description: "A command that introduces the bot",
 	queries: [
-		"^info$"
+		"info"
 	]
 })
 
@@ -12,7 +12,7 @@ config.add("baybayin", {
 	title: "Baybayin Transliterator",
 	description: "A transliterator from roman characters to baybayin script",
 	queries: [
-		"^baybay ([\\w\\W]+)$"
+		"baybay ([\\w\\W]+)"
 	],
 	hasArgs: true
 })
@@ -20,7 +20,7 @@ config.add("baybayin", {
 config.setOptions({
 	listenEvents: true,
 	selfListen: true,
-	markAsRead: true
+	autoMarkRead: true
 })
 
 config.setPrefix("√")
