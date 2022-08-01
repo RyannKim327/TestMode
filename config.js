@@ -84,7 +84,7 @@ const start = () => {
 	})
 }
 
-module.exports => {
+module.exports = {
 	add,
 	setOptions,
 	setPrefix,
