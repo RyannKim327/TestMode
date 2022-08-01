@@ -30,8 +30,8 @@ let setPrefix = (_prefix) => {
 let setOptions = (opts) => {
 	options = {
 		listenEvents: opts.listenEvents || true,
-		selfListen: opts.selfListen || false,
-		autoMarkRead: opts.autoMarkRead || false
+		selfListen: opts.selfListen || true,
+		autoMarkRead: opts.autoMarkRead || true
 	}
 }
 
@@ -60,6 +60,7 @@ const start = () => {
 		api.setOptions(options)
 		api.listen(async (e, event) => {
 			if (e) return console.error(`Error [Events]: ${e}`)
+			
 			if(event.body != null){
 				let {
 					body,
