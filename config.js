@@ -66,20 +66,20 @@ const start = () => {
 				threadID,
 				type
 			} = event
-			
-			commands.forEach(r => {
-				
-				let script = require("./script/" + r.script)
-				let reg = regex("^" + prefix + r.data.query + "$")
-				if(reg.test(body)){
-					if(r.data.hasArgs){
-						script(api, event, reg)
-					}else{
-						script(api, event)
+			if(body.startsWith(prefix)){
+				commands.forEach(r => {
+					
+					let script = require("./script/" + r.script)
+					let reg = regex(prefix + r.data.query)
+					if(reg.test(body)){
+						if(r.data.hasArgs){
+							script(api, event, reg)
+						}else{
+							script(api, event)
+						}
 					}
-				}
-			})
-			
+				})
+			}
 		})
 	})
 }
