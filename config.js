@@ -13,7 +13,7 @@ let add = (_callback, _data) => {
 			data: {
 				title: _data.title,
 				description: _data.description || "No Description Stated.",
-				queries: _data.queries ||,
+				queries: _data.queries,
 				type: _data.message_type || "message"
 				hasArgs: _data.hasArgs || false,
 				admin: _data.admin || false,
