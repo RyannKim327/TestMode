@@ -61,7 +61,7 @@ const start = () => {
 		api.listen(async (e, event) => {
 			let {
 				body,
-				messageID
+				messageID,
 				senderID,
 				threadID,
 				type
