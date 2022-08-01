@@ -59,26 +59,28 @@ const start = () => {
 		
 		api.setOptions(options)
 		api.listen(async (e, event) => {
-			let {
-				body,
-				messageID,
-				senderID,
-				threadID,
-				type
-			} = event
-			if(body.startsWith(prefix)){
-				commands.forEach(r => {
-					
-					let script = require("./script/" + r.script)
-					let reg = regex(prefix + r.data.query)
-					if(reg.test(body)){
-						if(r.data.hasArgs){
-							script(api, event, reg)
-						}else{
-							script(api, event)
+			if (e) return console.error(`Error [Events]: ${e}`)
+			if(event.body != null){
+				let {
+					body,
+					messageID,
+					senderID,
+					threadID,
+					type
+				} = event
+				if(body.startsWith(prefix)){
+					commands.forEach(r => {
+						let script = require("./script/" + r.script)
+						let reg = regex(prefix + r.data.query)
+						if(reg.test(body)){
+							if(r.data.hasArgs){
+								script(api, event, reg)
+							}else{
+								script(api, event)
+							}
 						}
-					}
-				})
+					})
+				}
 			}
 		})
 	})
