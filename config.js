@@ -70,7 +70,7 @@ const start = () => {
 			commands.forEach(r => {
 				
 				let script = require("./script/" + r.script)
-				let reg = regex(r.data.query)
+				let reg = regex(prefix + r.data.query)
 				if(reg.test(body)){
 					if(r.data.hasArgs){
 						script(api, event, reg)
