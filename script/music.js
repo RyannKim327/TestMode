@@ -8,8 +8,8 @@ module.exports = async (api, event, regex) => {
 	if(fs.existsSync(name)){
 		api.sendMessage("Lemme finish the earlier request please.", event.threadID)
 	}else{
-		api.setMessageReaction("", event.messageID, (e) => {}, true)
-		const youtube = await yt()
+		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
+		const youtube = await new yt()
 		let body = event.body.match(regex)[1]
 		let result = youtube.search(body)
 		if(result.videos.length > 0){
@@ -31,7 +31,7 @@ module.exports = async (api, event, regex) => {
 				})
 				f.pipe(file)
 				f.on("start", () => {
-					api.setMessageReaction("", event.messageID, (e) => {}, true)
+					api.setMessageReaction("⌛", event.messageID, (e) => {}, true)
 				})
 				f.on("end", async () => {
 					let user = await api.getUserInfo(event.senderID)
