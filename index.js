@@ -34,19 +34,11 @@ config.add("baybayin", {
 	hasArgs: true
 })
 
-config.add("morse", {
-	title: "Morse code",
-	description: "An encryption command from a-z 0-9 to morse code and vice versa.",
-	queries: [
-		
-	]
-})
-
 config.add("music", {
 	title: "YouTube Music Command",
 	description: "A music command which gives you a youtube music based results",
 	queries: [
-		"play\\sthe\\ssong([\\w\\W]+)\\please",
+		"play\\sthe\\ssong([\\w\\W]+)\\splease",
 		"please\\splay\\sthe\\ssong([\\w\\W]+)"
 	],
 	commands: [

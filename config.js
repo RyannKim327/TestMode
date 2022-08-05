@@ -52,9 +52,7 @@ let system = (api, event, r, q, _prefix) => {
 		args = r.data.hasArgs
 	
 	if(json_cooldown[event.senderID] == undefined){
-		console.log(_prefix)
 		if(reg.test(event.body)){
-			console.log("true")
 			let script
 			if(admin){
 				script = require("./admin/" + r.script)
