@@ -1,5 +1,5 @@
 module.exports = (name) => {
-	let names = name.split(" ")
+	let names = name.toLowerCase().split(" ")
 	let gender
 	if(names[0] == undefined){
 		if(names[1] == undefined){
