@@ -38,7 +38,7 @@ let system = (api, event, r, q, _prefix) => {
 	let reg = regex(prefix + q)
 	if(r.data.admin != undefined)
 		admin = r.data.admin
-	if(r.data.hasCooldown !=)
+	if(r.data.hasCooldown != undefined)
 		cooldown = r.data.hasCooldown
 	if(r.data.hasArgs != undefined)
 		args = r.data.hasArgs
