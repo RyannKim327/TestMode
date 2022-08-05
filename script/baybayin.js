@@ -2,7 +2,7 @@ const axios = require("axios")
 const gender = require("./../utils/gender")
 
 let result = async (str) => {
-	let data = await axios.get(`https://api-baybayin-transliterator.vercel.app?text=${str}`).then(r => {
+	let data = await axios.get("https://api-baybayin-transliterator.vercel.app/?text=" + str).then(r => {
 		return r.data
 	}).catch(e => {
 		console.error(`Error [Axios baybayin]: ${e}`)

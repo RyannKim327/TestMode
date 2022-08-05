@@ -12,7 +12,7 @@ module.exports = (api, event) => {
 			message += "~ Queries:\n"
 			data.queries.sort()
 			data.queries.forEach(q => {
-				message += "  " + j + ". " + name + ", " + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >") + q.replace(/(\(\[\\w\]\+\))/gi, "< data >") + q.replace(/(\\s)/gi, " ") + "\n'
+				message += "  " + j + ". " + name + ", " + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >") + q.replace(/(\(\[\\w\]\+\))/gi, "< data >") + q.replace(/(\\s)/gi, " ") + "\n"
 				j += 1
 			})
 		}
