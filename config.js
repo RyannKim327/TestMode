@@ -52,7 +52,7 @@ let system = (api, event, r, q, _prefix) => {
 		args = r.data.hasArgs
 	
 	if(json_cooldown[event.senderID] == undefined){
-		console.log("test")
+		console.log(_prefix)
 		if(reg.test(event.body)){
 			console.log("true")
 			let script
