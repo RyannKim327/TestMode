@@ -44,24 +44,32 @@ let system = (api, event, r, q, _prefix) => {
 		args = r.data.hasArgs
 	
 	if(json_cooldown[event.senderID] == undefined){
+		console.log("test")
 		if(reg.test(event.body)){
+			console.log("true")
 			let script
 			if(admin){
 				script = require("./admin/" + r.script)
+				if(args){
+					script(api, event, regex)
+				}else{
+					script(api, event)
+				}
 			}else{
 				script = require("./script/" + r.script)
-			}
-			if(args){
-				script(api, event, regex)
-			}else{
-				script(api, event)
+				if(args){
+					script(api, event, regex)
+				}else{
+					script(api, event)
+				}
 			}
 		}
-		if(cooldown && admins.includes(event.senderID)){
+		if(cooldown && !admins.includes(event.senderID)){
 			json_cooldown[event.senderID] = true
 			fs.writeFileSync("data/cooldown.json", JSON.stringify(json_cooldown), "utf8")
 			setTimeout(() => {
 				json_cooldown[event.senderID] = undefined
+				api.sendMessage("Cooldown done", event.threadID, event.messageID)
 				fs.writeFileSync("data/cooldown.json", JSON.stringify(json_cooldown), "utf8")
 			}, (1000 * 60))
 		}
