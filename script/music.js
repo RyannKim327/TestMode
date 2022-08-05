@@ -40,7 +40,7 @@ module.exports = async (api, event, regex) => {
 					let user = await api.getUserInfo(event.senderID)
 					let username = user[event.senderID]['name']
 					let g = gender(username)['eng']
-					message += `Here's your request ${g} {username}. A song entitled ${info.title}, uploaded by ${info.metadata.channel_name} on a platform called youtube.`
+					message += `Here's your request ${g} ${username}. A song entitled ${info.title}, uploaded by ${info.metadata.channel_name} on a platform called youtube.`
 					api.sendMessage({
 						body: message,
 						attachment: fs.createReadStream(name).on("end", async () => {
