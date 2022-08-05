@@ -71,7 +71,7 @@ config.add("wiki", {
 	hasArgs: true
 })
 
-config.setPrefix("")
+config.setPrefix("√")
 config.setName("Hally")
 config.setOptions({
 	listenEvents: true,
