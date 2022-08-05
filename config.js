@@ -94,7 +94,7 @@ let start = (state) => {
 				let name_lowercase = name.toLowerCase()
 				if(body_lowercase.startsWith(name_lowercase)){
 					commands.forEach(r => {
-						if(r.data.queries != undefined)
+						if(r.data.queries != undefined){
 							r.data.queries.forEach(q => {
 								system(api, event, r, q, name + ", ")
 							})
