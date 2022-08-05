@@ -43,7 +43,7 @@ let system = (api, event, r, q, _prefix) => {
 	let cooldown = true
 	let admin = false
 	let args = false
-	let reg = regex(prefix + q)
+	let reg = regex(_prefix + q)
 	if(r.data.admin != undefined)
 		admin = r.data.admin
 	if(r.data.hasCooldown != undefined)
@@ -112,7 +112,8 @@ let start = (state) => {
 					commands.forEach(r => {
 						if(r.data.queries != undefined){
 							r.data.queries.forEach(q => {
-								system(api, event, r, q, name + ", ")
+								let _prefix = name + ", "
+								system(api, event, r, q, _prefix)
 							})
 						}
 					})
