@@ -11,9 +11,6 @@ config.add("info", {
 		"info",
 		"help",
 		"intro",
-		"information",
-		"introduction",
-		"helpdesk",
 		"tutorial",
 		"how",
 		"tut"
