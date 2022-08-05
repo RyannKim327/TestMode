@@ -1,20 +1,22 @@
 const axios = require("axios")
+const gender = require("./../utils/gender")
 
-async function data(text) {
-	let { data } = await axios.get("https://api-baybayin-transliterator.vercel.app?text=" + text)
+let result = async (str) => {
+	let data = await axios.get(`https://api-baybayin-transliterator.vercel.app?text=${str}`).then(r => {
+		return r.data
+	}).catch(e => {
+		console.error(`Error [Axios baybayin]: ${e}`)
+		return null
+	})
 	return data
 }
 
-module.exports = (api, event, regex) => {
-	let {
-		body,
-		threadID
-	} = event
-	let _data = data.match(regex)[1]
-	if(_data == undefined){
-		api.sendMessage("Baybayin: Error", threadID)
-	}else{
-		let baybayin = data(_data)
-		api.sendMessage("Result: " + baybayin.baybay, threadID)
-	}
+module.exports = async (api, event, regex) => {
+	let _regex = event.body.match(regex)
+	let data = result(_regex[1])
+	let userID = event.senderID
+	let user = await api.getUserInfo(userID)
+	let name = user[userID].name
+	let g = gender(name)['eng']
+	api.sendMessage(`The text "${_regex[1]}" in baybayin ${g} ${name} is "${data}".`, event.threadID)
 }

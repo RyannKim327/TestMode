@@ -1,84 +1,111 @@
 const fca = require("fca-unofficial")
+const fs = require("fs")
 const regex = require("./utils/regex")
 
+let options = {
+	listenEvents: true,
+	selfListen: false
+}
 let commands = []
 let prefix = ""
-let options = {}
+let name = ""
 let admins = []
 
-let add = (_callback, _data) => {
-	if(_data.title != undefined && _data.title != ""){
-		commands.push({
-			script: _callback,
-			data: {
-				title: _data.title,
-				description: _data.description || "No Description Stated.",
-				queries: _data.queries,
-				type: _data.message_type || "message",
-				hasArgs: _data.hasArgs || false,
-				admin: _data.admin || false,
-				test: _data.test || false
+let add = (script, data) => {
+	commands.push({
+		script,
+		data
+	})
+}
+let setAdmins = (data) => {
+	admins.push(data)
+}
+let setName = (data) => {
+	name = data
+}
+let setOptions = (data) => {
+	options = data
+}
+let setPrefix = (data) => {
+	prefix = data
+}
+
+let system = (api, event, r, q, _prefix) => {
+	let json_cooldown = JSON.parse(fs.readFileSync("data/cooldown.json", "utf8"))
+	let cooldown = true
+	let admin = false
+	let args = false
+	let reg = regex(prefix + q)
+	if(r.data.admin != undefined)
+		admin = r.data.admin
+	if(r.data.hasCooldown !=)
+		cooldown = r.data.hasCooldown
+	if(r.data.hasArgs != undefined)
+		args = r.data.hasArgs
+	
+	if(json_cooldown[event.senderID] == undefined){
+		if(reg.test(event.body)){
+			let script
+			if(admin){
+				script = require("./admin/" + r.script)
+			}else{
+				script = require("./script/" + r.script)
 			}
-		})
+			if(args){
+				script(api, event, regex)
+			}else{
+				script(api, event)
+			}
+		}
+		if(cooldown && admins.includes(event.senderID)){
+			json_cooldown[event.senderID] = true
+			fs.writeFileSync("data/cooldown.json", JSON.stringify(json_cooldown), "utf8")
+			setTimeout(() => {
+				json_cooldown[event.senderID] = undefined
+				fs.writeFileSync("data/cooldown.json", JSON.stringify(json_cooldown), "utf8")
+			}, (1000 * 60))
+		}
 	}
 }
 
-let setPrefix = (_prefix) => {
-	prefix = _prefix
-}
-
-let setOptions = (opts) => {
-	options = {
-		listenEvents: opts.listenEvents || true,
-		selfListen: opts.selfListen || true,
-		autoMarkRead: opts.autoMarkRead || true
-	}
-}
-
-let getAdmins = () => {
-	return admins
-}
-
-let getCommands = () => {
-	return commands
-}
-
-let getPrefix = () => {
-	return prefix
-}
-
-const start = () => {
-	fca({
-		appState: JSON.parse(process.env['state'])
-	}, async (e, api) => {
-		if(e) return console.error(`Error [API]: ${e}`)
+let start = (state) => {
+	fca(state, async (error, api) => {
+		if(error) return console.error(`Error [API]: ${error}`)
 		
 		const self = await api.getCurrentUserID()
-		api.sendMessage("Bot Activated.", self)
-		admins.push(self)
-		
+		if(options.selfListen)
+			admins.push(self)
+		admins.forEach(id => {
+			api.sendMessage("Bot service is now actived.", id)
+		})
 		api.setOptions(options)
-		api.listen(async (e, event) => {
-			if (e) return console.error(`Error [Events]: ${e}`)
+		api.listen(async (error, event) => {
+			if(error) return console.error(`Error [Listen Emitter]: ${error}`)
+			
+			if(options.autoMarkRead != undefined){
+				if(options.autoMarkRead){
+					await api.markAsReadAll()
+				}
+			}
 			
 			if(event.body != null){
-				let {
-					body,
-					messageID,
-					senderID,
-					threadID,
-					type
-				} = event
-				if(body.startsWith(prefix)){
+				let body = event.body
+				let body_lowercase = body.toLowerCase()
+				let name_lowercase = name.toLowerCase()
+				if(body_lowercase.startsWith(name_lowercase)){
 					commands.forEach(r => {
-						let script = require("./script/" + r.script)
-						let reg = regex(prefix + r.data.query)
-						if(reg.test(body)){
-							if(r.data.hasArgs){
-								script(api, event, reg)
-							}else{
-								script(api, event)
-							}
+						if(r.data.queries != undefined)
+							r.data.queries.forEach(q => {
+								system(api, event, r, q, name + ", ")
+							})
+						}
+					})
+				}else if(body.startsWith(prefix)){
+					commands.forEach(r => {
+						if(r.data.commands != undefined){
+							r.data.commands.forEach(q => {
+								system(api, event, r, q, prefix)
+							})
 						}
 					})
 				}
@@ -89,10 +116,13 @@ const start = () => {
 
 module.exports = {
 	add,
+	setAdmins,
+	setName,
 	setOptions,
 	setPrefix,
 	start,
-	getCommands,
-	getAdmins,
-	getPrefix
+	
+	commands,
+	name,
+	prefix
 }
