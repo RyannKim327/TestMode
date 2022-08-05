@@ -11,22 +11,12 @@ module.exports = async (api, event, regex) => {
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const youtube = await new yt()
 		let body = event.body.match(regex)[1]
-		let result = await youtube.search(body).then(r => {
-			return r
-		}).catch(e =>  {
-			console.error("Error [Youtubei]: " + e)
-			return null
-		})
+		let result = await youtube.search(body)
 		if(result.videos.length > 0){
 			if(result.videos[0].id == undefined){
 				api,sendMessage("Something went wrong.", event.threadID)
 			}else{
-				const info = await youtube.getDetails(result.videos[0].id).then(r => {
-					return r
-				}).catch(e =>  {
-					console.error("Error [Youtubei]: " + e)
-					return null
-				})
+				const info = await youtube.getDetails(result.videos[0].id)
 				if(info.title == undefined){
 					api.sendMessage("An Error Occured", event.threadID)
 				}
@@ -56,12 +46,12 @@ module.exports = async (api, event, regex) => {
 						attachment: fs.createReadStream(name).on("end", async () => {
 							if(fs.existsSync(name)){
 								fs.unlink(name, (e) => {
-									if(e) return console.error(`Error [Youtue Music]: ${e}`)
+									if(e) return console.error(`Error [Youtube Music]: ${e}`)
 									api.setMessageReaction("", event.messageID, (e) => {}, true)
 								})
 							}
 						})
-					})
+					}, event.threadID)
 				})
 			}
 		}else{
