@@ -1,19 +1,22 @@
+const fs = require("fs")
+
 module.exports = (name) => {
 	let names = name.toLowerCase().split(" ")
+	let json = JSON.parse(fs.readFileSync("data/gender.json", "utf8"))
 	let gender
-	if(names[0] == undefined){
-		if(names[1] == undefined){
+	if(json[names[0]] == undefined){
+		if(json[names[1]] == undefined){
 			gender = {
 				eng: "Mr./Ms.",
 				tag: "Ginoong/Binibining"
 			}
 		}else{
-			if(names[1] == 1){
+			if(json[names[1]] == 1){
 				gender = {
 					eng: "Mr.",
 					tag: "Ginoong"
 				}
-			}else if(names[0] == 0){
+			}else if(json[names[0]] == 0){
 				gender = {
 					eng: "Ms.",
 					tag: "Binibining"
@@ -26,12 +29,12 @@ module.exports = (name) => {
 			}
 		}
 	}else{
-		if(names[0] == 1){
+		if(json[names[0]] == 1){
 			gender = {
 				eng: "Mr.",
 				tag: "Ginoong"
 			}
-		}else if(names[0] == 0){
+		}else if(json[names[0]] == 0){
 			gender = {
 				eng: "Ms.",
 			tag: "Binibining"
