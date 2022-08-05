@@ -11,12 +11,22 @@ module.exports = async (api, event, regex) => {
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const youtube = await new yt()
 		let body = event.body.match(regex)[1]
-		let result = await youtube.search(body)
+		let result = await youtube.search(body).then(r => {
+			return r
+		}).catch(e =>  {
+			console.error("Error [Youtubei]: " + e)
+			return null
+		})
 		if(result.videos.length > 0){
 			if(result.videos[0].id == undefined){
 				api,sendMessage("Something went wrong.", event.threadID)
 			}else{
-				const info = await youtube.getDetails(result.videos[0].id)
+				const info = await youtube.getDetails(result.videos[0].id).then(r => {
+					return r
+				}).catch(e =>  {
+					console.error("Error [Youtubei]: " + e)
+					return null
+				})
 				if(info.title == undefined){
 					api.sendMessage("An Error Occured", event.threadID)
 				}
