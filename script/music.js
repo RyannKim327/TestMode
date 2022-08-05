@@ -11,7 +11,7 @@ module.exports = async (api, event, regex) => {
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const youtube = await new yt()
 		let body = event.body.match(regex)[1]
-		let result = youtube.search(body)
+		let result = await youtube.search(body)
 		if(result.videos.length > 0){
 			if(result.videos[0].id == undefined){
 				api,sendMessage("Something went wrong.", event.threadID)
