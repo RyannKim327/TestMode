@@ -1,7 +1,7 @@
-const { commands, prefix, name } = require("./../config")
+const { commands, getPrefix, getName } = require("./../config")
 
 module.exports = (api, event) => {
-	let message = "Hello I am " + name + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"
+	let message = "Hello I am " + getName + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"
 	let i = 1
 	message += "List of Commands:\n"
 	commands.forEach(r => {
@@ -12,7 +12,7 @@ module.exports = (api, event) => {
 			message += "~ Queries:\n"
 			data.queries.sort()
 			data.queries.forEach(q => {
-				message += "  " + j + ". " + name + ", " + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >").replace(/(\(\[\\w\]\+\))/gi, "< data >").replace(/(\\s)/gi, " ") + "\n"
+				message += "  " + j + ". " + getName + ", " + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >").replace(/(\(\[\\w\]\+\))/gi, "< data >").replace(/(\\s)/gi, " ") + "\n"
 				j += 1
 			})
 		}
@@ -21,7 +21,7 @@ module.exports = (api, event) => {
 			data.commands.sort()
 			message += "~ Commands:\n"
 			data.commands.forEach(q => {
-				message += "  " + j + ". " + prefix + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >").replace(/(\(\[\\w\]\+\))/gi, "< data >").replace(/(\\s)/gi, " ") + "\n"
+				message += "  " + j + ". " + getPrefix + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >").replace(/(\(\[\\w\]\+\))/gi, "< data >").replace(/(\\s)/gi, " ") + "\n"
 				j += 1
 			})
 		}

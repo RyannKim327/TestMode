@@ -7,8 +7,8 @@ let options = {
 	selfListen: false
 }
 let commands = []
-let prefix = ""
-let name = ""
+let prefix
+let name
 let admins = []
 
 let add = (script, data) => {
@@ -28,6 +28,14 @@ let setOptions = (data) => {
 }
 let setPrefix = (data) => {
 	prefix = data
+}
+
+let getName = () => {
+	return name
+}
+
+let getPrefix = () => {
+	return prefix
 }
 
 let system = (api, event, r, q, _prefix) => {
@@ -51,14 +59,14 @@ let system = (api, event, r, q, _prefix) => {
 			if(admin){
 				script = require("./admin/" + r.script)
 				if(args){
-					script(api, event, regex)
+					script(api, event, reg)
 				}else{
 					script(api, event)
 				}
 			}else{
 				script = require("./script/" + r.script)
 				if(args){
-					script(api, event, regex)
+					script(api, event, reg)
 				}else{
 					script(api, event)
 				}
@@ -131,6 +139,6 @@ module.exports = {
 	start,
 	
 	commands,
-	name,
-	prefix
+	getName,
+	getPrefix
 }
