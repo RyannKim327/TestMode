@@ -38,6 +38,18 @@ let getPrefix = () => {
 	return prefix
 }
 
+let cd = (api, event, cooldown, json_cooldown) => {
+	if(cooldown && !admins.includes(event.senderID)){
+		json_cooldown[event.senderID] = true
+		fs.writeFileSync("data/cooldown.json", JSON.stringify(json_cooldown), "utf8")
+		setTimeout(() => {
+			json_cooldown[event.senderID] = undefined
+			api.sendMessage("Cooldown done", event.threadID, event.messageID)
+			fs.writeFileSync("data/cooldown.json", JSON.stringify(json_cooldown), "utf8")
+		}, (1000 * 60))
+	}
+}
+
 let system = (api, event, r, q, _prefix) => {
 	let json_cooldown = JSON.parse(fs.readFileSync("data/cooldown.json", "utf8"))
 	let cooldown = true
@@ -52,6 +64,8 @@ let system = (api, event, r, q, _prefix) => {
 		args = r.data.hasArgs
 	
 	if(json_cooldown[event.senderID] == undefined){
+		console.log(r.script)
+		console.log(json_cooldown)
 		if(reg.test(event.body)){
 			let script
 			if(admin){
@@ -64,20 +78,13 @@ let system = (api, event, r, q, _prefix) => {
 			}else{
 				script = require("./script/" + r.script)
 				if(args){
+					cd(api, event, cooldown, json_cooldown)
 					script(api, event, reg)
 				}else{
+					cd(api, event, cooldown, json_cooldown)
 					script(api, event)
 				}
 			}
-		}
-		if(cooldown && !admins.includes(event.senderID)){
-			json_cooldown[event.senderID] = true
-			fs.writeFileSync("data/cooldown.json", JSON.stringify(json_cooldown), "utf8")
-			setTimeout(() => {
-				json_cooldown[event.senderID] = undefined
-				api.sendMessage("Cooldown done", event.threadID, event.messageID)
-				fs.writeFileSync("data/cooldown.json", JSON.stringify(json_cooldown), "utf8")
-			}, (1000 * 60))
 		}
 	}
 }
