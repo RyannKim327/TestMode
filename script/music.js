@@ -33,6 +33,9 @@ module.exports = async (api, event, regex) => {
 				f.on("start", () => {
 					api.setMessageReaction("⌛", event.messageID, (e) => {}, true)
 				})
+				f.on("proccess", (info) => {
+					api.setMessageReaction("⏳", event.messageID, (err) => {}, true)
+				})
 				f.on("end", async () => {
 					let user = await api.getUserInfo(event.senderID)
 					let username = user[event.senderID]['name']
