@@ -12,7 +12,7 @@ module.exports = (api, event) => {
 			message += "~ Queries:\n"
 			data.queries.sort()
 			data.queries.forEach(q => {
-				message += "  " + j + ". " + name + ", " + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >") + q.replace(/(\(\[\\w\]\+\))/gi, "< data >") + q.replace(/(\\s)/gi, " ") + "\n"
+				message += "  " + j + ". " + name + ", " + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >").replace(/(\(\[\\w\]\+\))/gi, "< data >").replace(/(\\s)/gi, " ") + "\n"
 				j += 1
 			})
 		}
@@ -21,7 +21,7 @@ module.exports = (api, event) => {
 			data.commands.sort()
 			message += "~ Commands:\n"
 			data.commands.forEach(q => {
-				message += "  " + j + ". " + prefix + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >") + q.replace(/(\(\[\\w\]\+\))/gi, "< data >") + q.replace(/(\\s)/gi, " ") + "\n"
+				message += "  " + j + ". " + prefix + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >").replace(/(\(\[\\w\]\+\))/gi, "< data >").replace(/(\\s)/gi, " ") + "\n"
 				j += 1
 			})
 		}
