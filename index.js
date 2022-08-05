@@ -73,7 +73,7 @@ config.add("wiki", {
 
 config.setPrefix("")
 config.setName("Hally")
-congif.setOptions({
+config.setOptions({
 	listenEvents: true,
 	selfListen: true,
 	autoMarkRead: true
