@@ -51,6 +51,10 @@ module.exports = async (api, event, regex) => {
 								})
 							}
 						})
+						mentions: [{
+							id: event.senderID,
+							tag: username
+						}]
 					}, event.threadID)
 				})
 			}
