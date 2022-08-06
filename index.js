@@ -31,6 +31,15 @@ config.add("baybayin", {
 	hasArgs: true
 })
 
+config.add("guitar", {
+	title: "Ultimate Guitar Tabs Command",
+	description: "A command which gives you a random guitar chords/tabs.",
+	commands:[
+		"guitar\\s([\\w\\W]+)"
+	],
+	hasArgs: true
+})
+
 config.add("music", {
 	title: "YouTube Music Command",
 	description: "A music command which gives you a youtube music based results",
