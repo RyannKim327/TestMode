@@ -50,7 +50,7 @@ module.exports = async (api, event, regex) => {
 									api.setMessageReaction("", event.messageID, (e) => {}, true)
 								})
 							}
-						})
+						}),
 						mentions: [{
 							id: event.senderID,
 							tag: username
