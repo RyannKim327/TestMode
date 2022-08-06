@@ -26,7 +26,7 @@ module.exports = async (api, event, regex) => {
 		let i = Math.floor(Math.random() * results.length)
 		let j = []
 		let k = false
-		while(!k && (results[i].url == undefined || !(results[i].url.startsWith("https://tabs.ultimate-guitar.com"))){
+		while(!k && (results[i].url == undefined || !(results[i].url.startsWith("https://tabs.ultimate-guitar.com")))){
 			j.push(i)
 			if(j.includes(i)){
 				i = Math.floor(Math.random() * results.length)
