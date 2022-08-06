@@ -86,6 +86,8 @@ let system = (api, event, r, q, _prefix) => {
 				}
 			}
 			return false
+		}else{
+			return true
 		}
 	}
 }
