@@ -85,6 +85,7 @@ let system = (api, event, r, q, _prefix) => {
 					script(api, event)
 				}
 			}
+			return false
 		}
 	}
 }
@@ -113,20 +114,21 @@ let start = (state) => {
 				let body = event.body
 				let body_lowercase = body.toLowerCase()
 				let name_lowercase = name.toLowerCase()
+				let loop = true
 				if(body_lowercase.startsWith(name_lowercase)){
 					commands.forEach(r => {
-						if(r.data.queries != undefined){
+						if(r.data.queries != undefined && loop){
 							r.data.queries.forEach(q => {
 								let _prefix = name + ", "
-								system(api, event, r, q, _prefix)
+								loop = system(api, event, r, q, _prefix)
 							})
 						}
 					})
 				}else if(body.startsWith(prefix)){
 					commands.forEach(r => {
-						if(r.data.commands != undefined){
+						if(r.data.commands != undefined && loop){
 							r.data.commands.forEach(q => {
-								system(api, event, r, q, prefix)
+								loop = system(api, event, r, q, prefix)
 							})
 						}
 					})
