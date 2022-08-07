@@ -42,7 +42,7 @@ module.exports = async (api, event, regex) => {
 				let key = r.replace(/_/gi, " ").toUpperCase()
 				if(r != "title" && r != "type" && r != "description" && r != "url"){
 					if(Array.isArray(a[r])){
-						message += `* ${key}: ${a[r]}`
+						message += `* ${key}:\n`
 						let number = 1
 						let rate = a[r]
 						for(let i in rate){
