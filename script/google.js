@@ -3,9 +3,9 @@ const google = require("googlethis")
 let search = async (info) => {
 	let data = await google.search(info, {
 		safe: true,
-		additional_parameters:[
+		additional_parameters: {
 			hl: "en"
-		]
+		}
 	}).then(r => {
 		return r
 	}).catch(e => {
