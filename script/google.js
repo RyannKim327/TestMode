@@ -18,7 +18,7 @@ let search = async (info) => {
 module.exports = async (api, event, regex) => {
 	let body = event.body.match(regex)
 	api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
-	let data = await search(body)
+	let data = await search(body[1])
 	if(data == null){
 		api.sendMessage("An error occured. Please try again later.", event.threadID)
 		api.setMessageReaction("", event.messageID, (e) => {}, true)
