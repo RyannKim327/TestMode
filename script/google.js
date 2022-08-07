@@ -42,13 +42,14 @@ module.exports = async (api, event, regex) => {
 				let key = r.replace(/_/gi, " ").toUpperCase()
 				if(r != "title" && r != "type" && r != "description" && r != "url"){
 					if(Array.isArray(a[r])){
-						message += `* ${key}: a[r]`
+						message += `* ${key}: ${a[r]}`
 						let number = 1
 						let rate = a[r]
 						for(let i in rate){
 							let keys = Object.keys(rate[i])
 							keys.forEach(s => {
 								message += `  ${number}. ${s.toUpperCase()} - ${rate[i][s]}\n`
+								number++
 							})
 						}
 					}else{
