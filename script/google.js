@@ -9,7 +9,7 @@ let search = async (info) => {
 	}).then(r => {
 		return r
 	}).catch(e => {
-		console.error(`Error [Google Search]: ${e}`
+		console.error(`Error [Google Search]: ${e}`)
 		return null
 	})
 	return data
