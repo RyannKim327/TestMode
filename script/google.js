@@ -136,7 +136,7 @@ module.exports = async (api, event, regex) => {
 				let i = 1
 				for(let c = 0; c < b.length; c++){
 					if(a[b[c]].title != undefined || a[b[c]] != undefined){
-						message += `${i}. ${a[b[c]].title}\n~ ${a[b[c]].description}\nSource: ${a[b[c]].url.replace(/\./gi,"(dot)}"\n\n`
+						message += `${i}. ${a[b[c]].title}\n~ ${a[b[c]].description}\nSource: ${a[b[c]].url.replace(/\./gi,"(dot)")}\n\n`
 						i++
 					}
 				}
