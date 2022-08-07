@@ -51,7 +51,7 @@ module.exports = async (api, event, regex) => {
 							})
 						}
 					}else{
-						message += `* ${key}: a[r]\n`
+						message += `* ${key}: ${a[r]}än`
 					}
 				}
 			})
