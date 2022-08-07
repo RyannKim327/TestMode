@@ -12,10 +12,12 @@ let name
 let admins = []
 
 let add = (script, data) => {
-	commands.push({
-		script,
-		data
-	})
+	if(script != "" && data.title != ""){
+		commands.push({
+			script,
+			data
+		})
+	}
 }
 let setAdmins = (data) => {
 	admins.push(data)

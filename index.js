@@ -31,11 +31,21 @@ config.add("baybayin", {
 	hasArgs: true
 })
 
+config.add("google", {
+	title: "Google Search Engine",
+	description: "A command with educational purposes searches.",
+	commands: [
+		"google\\s([\\w\\W]+)"
+	],
+	hasArgs: true
+})
+
 config.add("guitar", {
 	title: "Ultimate Guitar Tabs Command",
 	description: "A command which gives you a random guitar chords/tabs.",
 	commands:[
-		"guitar\\s([\\w\\W]+)"
+		"guitar\\s([\\w\\W]+)",
+		"tabs\\s([\\w\\W]+)"
 	],
 	hasArgs: true
 })
