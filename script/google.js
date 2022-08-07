@@ -21,8 +21,9 @@ module.exports = async (api, event, regex) => {
 	let data = await search(body)
 	if(data == null){
 		api.sendMessage("An error occured. Please try again later.", event.threadID)
+		api.setMessageReaction("", event.messageID, (e) => {}, true)
 	}else{
-		if(data.did_you_mean !=){
+		if(data.did_you_mean != undefined){
 			api.sendMessage(`Did you mean: ${data.did_you_mean}.`, event.threadID)
 		}
 		if(data.knowledge_panel.title != "N/A" && data.knowledge_panel.lyrics == undefined && (data.knowledge_panel.description != "N/A" || data.featured_snippet.description != "N/A")){
@@ -58,10 +59,12 @@ module.exports = async (api, event, regex) => {
 				message += `\nSource: ${a.url}`
 			}
 			api.sendMessage(message, event.threadID)
+			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.knowledge_panel.lyrics != undefined){
 			let a = data.knowledge_panel
 			let message = `Title: ${a.title} - ${a.type}\n\n${a.lyrics}`
 			api.sendMessage(message, event.threadID)
+			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.featured_snippet.title != "N/A" && data.featured_snippet.description != "N/A"){
 			let a = data.featured_snippet
 			let message = `${a.title}\n~ ${a.description}`
@@ -69,9 +72,11 @@ module.exports = async (api, event, regex) => {
 				message += `\n${a.url}`
 			}
 			api.sendMessage(message, event.threadID)
+			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.translation != undefined){
 			let a = data.translations
 			api.sendMessage(`Original Text: ${a.source_text}\nTranslated: ${a.target_text}\n\nTranslated: ${a.source_language} - ${a.target_language}`, event.threadID)
+			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.dictionary != undefined){
 			let a = data.dictionary
 			let message = a.word + "\n" + a.phonetic + "\n\nDefinitions\n"
@@ -110,9 +115,11 @@ module.exports = async (api, event, regex) => {
 			}else{
 				api.sendMessage(message, event.threadID)
 			}
+			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.unit_converter != undefined){
 			let a = data.unit_converter
 			api.sendMessage(`Input: ${a.input}\nOutput: ${a.output}\n\nFormula ${a.formula}`, event.threadID)
+			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else{
 			if(data.results.length > 0){
 				let a = data.results
@@ -137,7 +144,7 @@ module.exports = async (api, event, regex) => {
 			}else{
 				api.sendMessage("There's no results found, might have server error. Please try again later.", event.threadID)
 			}
+			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}
 	}
-	api.setMessageReaction("", event.messageID, (e) => {}, true)
 }
