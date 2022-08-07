@@ -35,8 +35,8 @@ module.exports = async (api, event, regex) => {
 			message += "\n\n"
 			if(a.description != "N/A")
 				message += `~ ${a.description}\n`
-			if(data.featured_snippet != "N/A")
-				message += `~ ${data.featured_snippet.description}`
+			if(data.featured_snippet.description != "N/A")
+				message += `~ ${data.featured_snippet.description}\n`
 			objs.forEach(r => {
 				let key = r.replace(/_/gi, " ").toUpperCase()
 				if(r != "title" && r != "type" && r != "description" && r != "url"){
