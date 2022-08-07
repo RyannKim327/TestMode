@@ -31,12 +31,13 @@ module.exports = async (api, event, regex) => {
 			let objs = Object.keys(a)
 			let message = `${a.title}`
 			if(a.type != undefined || a.type != "N/A")
-				message += `- ${a.type}`
+				message += ` - ${a.type}`
 			message += "\n\n"
 			if(a.description != "N/A")
 				message += `~ ${a.description}\n`
 			if(data.featured_snippet.description != "N/A")
-				message += `~ ${data.featured_snippet.description}\n\n`
+				message += `~ ${data.featured_snippet.description}\n`
+			message += "\n"
 			objs.forEach(r => {
 				let key = r.replace(/_/gi, " ").toUpperCase()
 				if(r != "title" && r != "type" && r != "description" && r != "url"){
@@ -47,7 +48,7 @@ module.exports = async (api, event, regex) => {
 						for(let i in rate){
 							let keys = Object.keys(rate[i])
 							keys.forEach(s => {
-								message += `  ${number}. ${y.toUpperCase()} - ${rate[i][s]}\n`
+								message += `  ${number}. ${s.toUpperCase()} - ${rate[i][s]}\n`
 							})
 						}
 					}else{
