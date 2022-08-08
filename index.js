@@ -34,7 +34,7 @@ config.add("gender", {
 	title: "Add new Gender",
 	description: "For admin use.",
 	commands: [
-		"gender\\s([\\w]+)\\sas\\s([\\w]+)"
+		"gender\\s([\\w\\W]+)\\sas\\s([\\w\\W]+)"
 	],
 	admin: true
 })
