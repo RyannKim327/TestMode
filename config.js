@@ -57,6 +57,7 @@ let system = (api, event, r, q, _prefix) => {
 	let cooldown = true
 	let admin = false
 	let args = false
+	let type = ["message"]
 	let reg = regex(_prefix + q)
 	if(r.data.admin != undefined)
 		admin = r.data.admin
@@ -64,11 +65,13 @@ let system = (api, event, r, q, _prefix) => {
 		cooldown = r.data.hasCooldown
 	if(r.data.hasArgs != undefined)
 		args = r.data.hasArgs
+	if(r.data.type != undefined)
+		type = r.data.type
 	
 	if(json_cooldown[event.senderID] == undefined){
 		console.log(r.script)
 		console.log(json_cooldown)
-		if(reg.test(event.body)){
+		if(reg.test(event.body) && type.includes(event.type)){
 			let script
 			if(admin){
 				script = require("./admin/" + r.script)

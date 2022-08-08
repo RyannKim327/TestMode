@@ -37,7 +37,11 @@ config.add("gender", {
 		"gender\\s([\\w]+)\\sas\\s([\\w]+)"
 	],
 	admin: true,
-	hasArgs: true
+	hasArgs: true,
+	type: [
+		"message",
+		"message_reply"
+	]
 })
 
 config.add("google", {
