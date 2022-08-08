@@ -3,12 +3,12 @@ const fs = require("fs")
 module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/gender.json", "utf8"))
 	let data = event.body.match(regex)
-	let name = data[1]
+	let name = data[1].toLowerCase()
 	if(event.type == "message_reply"){
 		let user = await api.getUserInfo(event.messageReply.senderID)
 		let username = user[event.messageReply.senderID]['name']
 		let _name = username.split(" ")
-		name = _name[0]
+		name = _name[0].toLowerCase()
 	}
 	let g = data[2]
 	console.log(name)
