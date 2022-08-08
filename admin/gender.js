@@ -23,26 +23,26 @@ module.exports = async (api, event, regex) => {
 			default:
 				gender = -1
 		}
-		if(json[name] == undefined){
-			json[name] = gender
-		}else{
-			let _gender = json[name]
-			switch(_gender){
-				case 0:
-					if(gender == 1 || gender == -1){
-						json[name] = -1
-					}
-				break
-				case 1:
-					if(gender == 0 || gender == -1){
-						json[name] = -1
-					}
-				break
-			}
-		}
-		fs.writeFileSync("data/gender.json", JSON.stringify(json), "utf8")
-		api.sendMessage("New name registered.", event.threadID)
-		let self = await api.getCurrentUserID()
-		api.sendMessage(fs.readFileSync("data/gender.json", "utf8"), self)
 	}
+	if(json[name] == undefined){
+		json[name] = gender
+	}else{
+		let _gender = json[name]
+			switch(_gender){
+			case 0:
+				if(gender == 1 || gender == -1){
+					json[name] = -1
+				}
+			break
+			case 1:
+				if(gender == 0 || gender == -1){
+					json[name] = -1
+				}
+			break
+		}
+	}
+	fs.writeFileSync("data/gender.json", JSON.stringify(json), "utf8")
+	api.sendMessage("New name registered.", event.threadID)
+	let self = await api.getCurrentUserID()
+	api.sendMessage(fs.readFileSync("data/gender.json", "utf8"), self)
 }
