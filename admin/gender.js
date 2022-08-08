@@ -4,6 +4,12 @@ module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/gender.json", "utf8"))
 	let data = event.body.match(regex)
 	let name = data[1]
+	if(event.type == "message_reply"){
+		let user = await api.getUserInfo(event.messageReply.senderID)
+		let username = user[event.messageReply.senderID]['name']
+		let _name = username.split(" ")
+		name = _name[0]
+	}
 	let g = data[2]
 	console.log(name)
 	console.log(g)
