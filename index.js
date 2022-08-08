@@ -34,9 +34,10 @@ config.add("gender", {
 	title: "Add new Gender",
 	description: "For admin use.",
 	commands: [
-		"gender\\s([\\w\\W]+)\\sas\\s([\\w\\W]+)"
+		"gender\\s([\\w]+)\\sas\\s([\\w]+)"
 	],
-	admin: true
+	admin: true,
+	hasArgs: true
 })
 
 config.add("google", {
