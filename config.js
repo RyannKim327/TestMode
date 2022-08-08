@@ -73,7 +73,7 @@ let system = (api, event, r, q, _prefix) => {
 		console.log(json_cooldown)
 		if(reg.test(event.body) && type.includes(event.type)){
 			let script
-			if(admin){
+			if(admin && admins.includes(event.senderID)){
 				script = require("./admin/" + r.script)
 				if(args){
 					script(api, event, reg)
