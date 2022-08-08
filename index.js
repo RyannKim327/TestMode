@@ -11,7 +11,6 @@ config.add("info", {
 		"info",
 		"help",
 		"intro",
-		"tutorial",
 		"how",
 		"tut"
 	],
@@ -29,6 +28,15 @@ config.add("baybayin", {
 		"baybayin\\s([\\w\\W]+)"
 	],
 	hasArgs: true
+})
+
+config.add("gender", {
+	title: "Add new Gender",
+	description: "For admin use.",
+	commands: [
+		"gender\\s([\\w]+)\\sas\\s([\\w]+)"
+	],
+	admin: true
 })
 
 config.add("google", {
