@@ -5,6 +5,8 @@ module.exports = async (api, event, regex) => {
 	let data = event.body.match(regex)
 	let name = data[1]
 	let g = data[2]
+	console.log(name)
+	console.log(g)
 	let gender
 	if(g == undefined){
 		gender = -1
