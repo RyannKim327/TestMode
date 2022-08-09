@@ -31,32 +31,31 @@ let setOptions = (data) => {
 let setPrefix = (data) => {
 	prefix = data
 }
-
 let getName = () => {
 	return name
 }
-
 let getPrefix = () => {
 	return prefix
 }
 
-let cd = (api, event, cooldown, json_cooldown) => {
+let cd = (api, event, cooldown, json) => {
 	if(cooldown && !admins.includes(event.senderID)){
-		json_cooldown[event.senderID] = true
-		fs.writeFileSync("data/cooldown.json", JSON.stringify(json_cooldown), "utf8")
+		json.cooldown[event.senderID] = true
+		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 		setTimeout(() => {
-			json_cooldown[event.senderID] = undefined
+			json.cooldown[event.senderID] = undefined
 			api.sendMessage("Cooldown done", event.threadID, event.messageID)
-			fs.writeFileSync("data/cooldown.json", JSON.stringify(json_cooldown), "utf8")
+			fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 		}, (1000 * 60))
 	}
 }
 
 let system = (api, event, r, q, _prefix) => {
-	let json_cooldown = JSON.parse(fs.readFileSync("data/cooldown.json", "utf8"))
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let cooldown = true
 	let admin = false
 	let args = false
+	let game = false
 	let type = ["message"]
 	let reg = regex(_prefix + q)
 	if(r.data.admin != undefined)
@@ -65,13 +64,13 @@ let system = (api, event, r, q, _prefix) => {
 		cooldown = r.data.hasCooldown
 	if(r.data.hasArgs != undefined)
 		args = r.data.hasArgs
+	if(r.data.game != undefined)
+		game = r.data.game
 	if(r.data.type != undefined)
 		type = r.data.type
 	
-	if(json_cooldown[event.senderID] == undefined){
-		console.log(r.script)
-		console.log(json_cooldown)
-		if(reg.test(event.body) && type.includes(event.type)){
+	if(json.cooldown[event.senderID] == undefined){
+		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !off.includes(event.threadID) && !off.includes(event.senderID) && !saga.includes(event.threadID)) || admins.includes(event.senderID))){
 			let script
 			if(admin){
 				script = require("./admin/" + r.script)
@@ -82,13 +81,20 @@ let system = (api, event, r, q, _prefix) => {
 						script(api, event)
 					}
 				}
+			}else if(game){
+				script = require("./game/" + r.script)
+				if(args){
+					script(api, event, reg)
+				}else{
+					script(api, event)
+				}
 			}else{
 				script = require("./script/" + r.script)
 				if(args){
-					cd(api, event, cooldown, json_cooldown)
+					cd(api, event, cooldown, json)
 					script(api, event, reg)
 				}else{
-					cd(api, event, cooldown, json_cooldown)
+					cd(api, event, cooldown, json)
 					script(api, event)
 				}
 			}
@@ -107,8 +113,9 @@ let start = (state) => {
 		if(options.selfListen)
 			admins.push(self)
 		admins.forEach(id => {
-			api.sendMessage("Bot service is now actived.", id)
+			api.sendMessage("Bot service is now activated.", id)
 		})
+		
 		api.setOptions(options)
 		api.listen(async (error, event) => {
 			if(error) return console.error(`Error [Listen Emitter]: ${error}`)

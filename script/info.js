@@ -6,7 +6,7 @@ module.exports = (api, event) => {
 	message += "List of Commands:\n"
 	commands.forEach(r => {
 		let data = r.data
-		if(!data.admin){
+		if(!data.admin && !data.game){
 			message += i + ". " + data.title + "\n~ " + data.description + "\n"
 			let j = 1
 			if(data.queries != undefined){
@@ -26,6 +26,22 @@ module.exports = (api, event) => {
 					j += 1
 				})
 			}
+			message += "\n"
+			i += 1
+		}
+	})
+	message += "\nGame Commands:\n"
+	i = 1
+	commands.forEach(r => {
+		let data = r.data
+		if(!data.admin && data.game){
+			message += i + ". " + data.title + "\n~ " + data.description + "\n"
+			let j = 1
+			data.commands.sort()
+			data.commands.forEach(q => {
+				j += 1
+				message += j + ". " + getPrefix() + q.replace(/(\(\[\\w\\W\]\+\))/gi, "< data >").replace(/(\(\[\\w\]\+\))/gi, "< data >").replace(/(\\s)/gi, " ") + "\n"
+			})
 			message += "\n"
 			i += 1
 		}

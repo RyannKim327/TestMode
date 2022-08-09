@@ -92,6 +92,19 @@ config.add("wiki", {
 	hasArgs: true
 })
 
+config.add("dice", {
+	title: "Roll A Die Game",
+	description: "A simple random with vs players or vs computer.",
+	commands: [
+		"game\\sroll\\sa\\die"
+	],
+	type: [
+		"message",
+		"message_reply"
+	],
+	game: true
+})
+
 config.setPrefix("√")
 config.setName("Hally")
 config.setOptions({
