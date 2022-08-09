@@ -96,7 +96,7 @@ config.add("dice", {
 	title: "Roll A Die Game",
 	description: "A simple random with vs players or vs computer.",
 	commands: [
-		"game\\sroll\\sa\\die"
+		"game\\sroll\\sa\\sdie"
 	],
 	type: [
 		"message",
