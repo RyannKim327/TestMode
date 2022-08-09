@@ -34,7 +34,7 @@ module.exports = (api, event) => {
 	i = 1
 	commands.forEach(r => {
 		let data = r.data
-		if(!data.admin && data.game){
+		if(!data.admin && data.game && data.game != undefined){
 			message += i + ". " + data.title + "\n~ " + data.description + "\n"
 			let j = 1
 			data.commands.sort()

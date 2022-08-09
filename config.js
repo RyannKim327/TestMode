@@ -70,7 +70,7 @@ let system = (api, event, r, q, _prefix) => {
 		type = r.data.type
 	
 	if(json.cooldown[event.senderID] == undefined){
-		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !off.includes(event.threadID) && !off.includes(event.senderID) && !saga.includes(event.threadID)) || admins.includes(event.senderID))){
+		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID)) || admins.includes(event.senderID))){
 			let script
 			if(admin){
 				script = require("./admin/" + r.script)
