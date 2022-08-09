@@ -6,7 +6,7 @@ module.exports = async (api, event, regex) => {
 	let name = data[1].toLowerCase()
 	if(event.type == "message_reply"){
 		let user = await api.getUserInfo(event.messageReply.senderID)
-		let username = user[event.messageReply.senderID]['name']
+		let username = user[event.messageReply.senderID]['firstName']
 		let _name = username.split(" ")
 		name = _name[0].toLowerCase()
 	}
