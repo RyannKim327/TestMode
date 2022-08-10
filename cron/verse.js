@@ -10,7 +10,7 @@ let verse = async () => {
 	return result
 }
 
-module.exports = async (api. threadID) => {
+module.exports = async (api, threadID) => {
 	let data = await verse()
 	if(data != null){
 		let message = "Bible verse of the day:\n"
