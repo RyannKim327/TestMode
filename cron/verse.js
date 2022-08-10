@@ -1,7 +1,7 @@
 const axios = require("axios")
 
 let verse = async () => {
-	let result = await axios.get("http://labs.bible.org/api/?passage=votd?type=json").then(r => {
+	let result = await axios.get("https://labs.bible.org/api/?passage=votd&type=json").then(r => {
 		return r.data
 	}).catch(e => {
 		console.error(`Error [Axios Verse]: ${e}`)
