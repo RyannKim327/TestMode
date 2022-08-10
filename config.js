@@ -1,5 +1,6 @@
 const fca = require("fca-unofficial")
 const fs = require("fs")
+const cron = require("./cron/start")
 const regex = require("./utils/regex")
 
 let options = {
@@ -115,6 +116,8 @@ let start = (state) => {
 		admins.forEach(id => {
 			api.sendMessage("Bot service is now activated.", id)
 		})
+		
+		cron(api)
 		
 		api.setOptions(options)
 		api.listen(async (error, event) => {

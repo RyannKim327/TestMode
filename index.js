@@ -67,7 +67,7 @@ config.add("music", {
 	title: "YouTube Music Command",
 	description: "A music command which gives you a youtube music based results",
 	queries: [
-		"play\\sthe\\ssong([\\w\\W]+)\\splease",
+		"play\\sthe\\ssong\\s([\\w\\W]+)\\splease",
 		"please\\splay\\sthe\\ssong([\\w\\W]+)"
 	],
 	commands: [
