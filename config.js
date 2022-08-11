@@ -129,7 +129,7 @@ let start = (state) => {
 					if(event.mentions[self] != undefined){
 						api.sendMessage("The account owner is now on a busy mode, please wait for a moment.", event.threadID)
 						json.busylist.push(event.threadID)
-						fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8"))
+						fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 					}
 				}
 			}
