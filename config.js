@@ -126,7 +126,7 @@ let start = (state) => {
 			let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 			if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
 				let thread = await api.getThreadInfo(event.threadID)
-				if(!thread.isGroup){
+				if(thread.isGroup == false){
 					api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID)
 					json.busylist.push(event.threadID)
 					fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
