@@ -133,7 +133,7 @@ let start = (state) => {
 					}
 				}else{
 					let thread = await api.getThreadInfo(event.threadID)
-					if(!thread.isGroup){
+					if(!thread.isGroup && !admins.includes(event.senderID)){
 						api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID)
 						json.busylist.push(event.threadID)
 						fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
