@@ -123,22 +123,6 @@ let start = (state) => {
 		api.listen(async (error, event) => {
 			if(error) return console.error(`Error [Listen Emitter]: ${error}`)
 			
-			let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-			if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
-				let thread = await api.getThreadInfo(event.threadID)
-				if(thread.isGroup == false){
-					api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID)
-					json.busylist.push(event.threadID)
-					fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-				}else if(event.mentions != undefined){
-					if(event.mentions[self] != undefined){
-						api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID)
-						json.busylist.push(event.threadID)
-						fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-					}
-				}
-			}
-			
 			if(options.autoMarkRead != undefined){
 				if(options.autoMarkRead){
 					await api.markAsReadAll()
@@ -150,6 +134,23 @@ let start = (state) => {
 				let body_lowercase = body.toLowerCase()
 				let name_lowercase = name.toLowerCase()
 				let loop = true
+				
+				let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+				if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
+					let thread = await api.getThreadInfo(event.threadID)
+					if(thread.isGroup == false){
+						api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID)
+						json.busylist.push(event.threadID)
+						fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+					}else if(event.mentions != undefined){
+						if(event.mentions[self] != undefined){
+							api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID)
+							json.busylist.push(event.threadID)
+							fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+						}
+					}
+				}
+				
 				if(body_lowercase.startsWith(name_lowercase)){
 					commands.forEach(r => {
 						if(r.data.queries != undefined && loop){
