@@ -1,5 +1,7 @@
 {
 	"status": true,
+	"busy": false,
+	"busylist": [],
 	"off": "100009370868649, 100070878915450, ",
 	"badwords": [
 		"tanga",

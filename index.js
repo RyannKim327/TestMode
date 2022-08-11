@@ -30,6 +30,15 @@ config.add("baybayin", {
 	hasArgs: true
 })
 
+config.add("busy", {
+	title: "Busy Mode",
+	description: "For admin",
+	commands: [
+		"busy"
+	],
+	admin: true
+})
+
 config.add("gender", {
 	title: "Add new Gender",
 	description: "For admin use.",

@@ -123,6 +123,17 @@ let start = (state) => {
 		api.listen(async (error, event) => {
 			if(error) return console.error(`Error [Listen Emitter]: ${error}`)
 			
+			let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+			if(json.busy && !json.busylist.includes(event.threadID)){
+				if(event.mentions != undefined){
+					if(event.mentions[self] != undefined){
+						api.sendMessage("The account owner is now on a busy mode, please wait for a moment.", event.threadID)
+						json.busylist.push(event.threadID)
+						fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8"))
+					}
+				}
+			}
+			
 			if(options.autoMarkRead != undefined){
 				if(options.autoMarkRead){
 					await api.markAsReadAll()
