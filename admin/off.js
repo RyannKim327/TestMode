@@ -20,7 +20,7 @@ module.exports = async (api, event) => {
 			let thread = await api.getThreadInfo(id)
 			json.off = json.off.replace(id + ", ", "")
 			api.sendMessage({
-				body: `Bot actions are now enabled for ${thread.threadName}`,
+				body: `Bot actions are now enabled for ${thread.threadName}`
 			}, event.threadID)
 		}
 	}else if(body == "√off"){
@@ -40,7 +40,7 @@ module.exports = async (api, event) => {
 			let thread = await api.getThreadInfo(id)
 			json.off += id + ", "
 			api.sendMessage({
-				body: `Bot actions are now disabled for ${thread.threadName}`,
+				body: `Bot actions are now disabled for ${thread.threadName}`
 			}, event.threadID)
 		}
 	}
