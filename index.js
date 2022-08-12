@@ -91,7 +91,8 @@ config.add("off", {
 	title: "Off Command",
 	description: "For admin use",
 	commands: [
-		"off"
+		"off",
+		"on"
 	],
 	type: [
 		"message",
