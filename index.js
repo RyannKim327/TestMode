@@ -96,7 +96,7 @@ config.add("off", {
 	type: [
 		"message",
 		"message_reply"
-	]
+	],
 	admin: true
 })
 
