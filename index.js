@@ -86,7 +86,7 @@ config.add("music", {
 	],
 	hasArgs: true
 })
-
+/*
 config.add("off", {
 	title: "Off Command",
 	description: "For admin use",
@@ -117,7 +117,7 @@ config.add("toggle", {
 	],
 	admin: true
 })
-
+*/
 config.add("wiki", {
 	title: "Wikipedia Search",
 	description: "A simple search document which gives you a wikipedia based resukts.\nDisclaimer: Wikipedia is not so accurate so that if you were using this for research purposes, please don't continue it.",
