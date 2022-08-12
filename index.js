@@ -106,6 +106,10 @@ config.add("pin", {
 	commands: [
 		"pin"
 	],
+	type: [
+		"message",
+		"message_reply"
+	],
 	admin: true
 })
 
