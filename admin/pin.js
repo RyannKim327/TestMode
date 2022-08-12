@@ -3,7 +3,7 @@ const fs = require("fs")
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	if(event.type == "message_reply"){
-		if(event.messageReply.body == "")
+		if(event.messageReply.body == ""){
 			json.pin.message[event.threadID] = undefined
 			json.pin.sender[event.threadID] = undefined
 		}else{
