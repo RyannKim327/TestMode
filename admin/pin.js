@@ -20,13 +20,13 @@ module.exports = async (api, event) => {
 		if(json.pin.message[event.threadID] == undefined){
 			api.sendMessage("There is no pinned message here.", event.threadID)
 		}else{
-			let id = parseInt(json.pin.sender[event.threadID])
-			let user = await api.getUserInfo(id)
+			let ids = parseInt(json.pin.sender[event.threadID])
+			let user = await api.getUserInfo(ids)
 			api.sendMessage({
-				body: `Here is the pinned message sent by ${user[id]['name']}\n\n~ ${json.pin.message[event.threadID]}`,
+				body: `Here is the pinned message sent by ${user[ids]['name']}\n\n~ ${json.pin.message[event.threadID]}`,
 				mentions: [{
-					id,
-					tag: user[id]['name']
+					id: ids,
+					tag: user[ids]['name']
 				}]
 			}, event.threadID)
 		}
