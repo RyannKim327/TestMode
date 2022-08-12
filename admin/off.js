@@ -29,7 +29,7 @@ module.exports = async (api, event) => {
 			let user = await api.getUserInfo(id)
 			json.off += id + ", "
 			api.sendMessage({
-				body: `Bot actions are now enabled for ${user[id]['name']}`,
+				body: `Bot actions are now disabled for ${user[id]['name']}`,
 				mentions: [{
 					id,
 					tag: user[id]['name']
@@ -40,7 +40,7 @@ module.exports = async (api, event) => {
 			let thread = await api.getThreadInfo(id)
 			json.off += id + ", "
 			api.sendMessage({
-				body: `Bot actions are now enabled for ${thread.threadName}`,
+				body: `Bot actions are now disabled for ${thread.threadName}`,
 			}, event.threadID)
 		}
 	}
