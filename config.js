@@ -177,6 +177,7 @@ let start = (state) => {
 						}
 					})
 					if(loop && json.cooldown[event.senderID] == undefined){
+						let cooldown = true
 						openai(api, event)
 						cd(api, event, cooldown, json, 2)
 					}
