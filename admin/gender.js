@@ -62,6 +62,6 @@ module.exports = async (api, event, regex) => {
 	msg += "}"
 	
 	let self = await api.getCurrentUserID()
-	api.sendMessage(mgs, self)
+	api.sendMessage(msg, self)
 	
 }
