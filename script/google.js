@@ -84,7 +84,7 @@ module.exports = async (api, event, regex) => {
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.translation != undefined){
-			let a = data.translations
+			let a = data.translation
 			api.sendMessage(`Original Text: ${a.source_text}\nTranslated: ${a.target_text}\n\nTranslated: ${a.source_language} - ${a.target_language}`, event.threadID, (e) => {
 				if(e) return api.sendMessage(e, event.threadID)
 			})
