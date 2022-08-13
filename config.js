@@ -167,7 +167,7 @@ let start = (state) => {
 					api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
 				}else if(body_lowercase.startsWith(name_lowercase)){
 					commands.forEach(r => {
-						if(r.data.queries != undefined &&){
+						if(r.data.queries != undefined){
 							r.data.queries.forEach(q => {
 								if(loop){
 									let _prefix = name + ", "
@@ -182,7 +182,7 @@ let start = (state) => {
 					}
 				}else if(body.startsWith(prefix)){
 					commands.forEach(r => {
-						if(r.data.commands != undefined &&){
+						if(r.data.commands != undefined){
 							r.data.commands.forEach(q => {
 								if(loop){
 									loop = system(api, event, r, q, prefix)
