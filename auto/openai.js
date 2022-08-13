@@ -7,7 +7,7 @@ let config = async (str) => {
 	let openai = new OpenAIApi(configurations)
 	let { data } = await openai.createCompletion({
 		prompt: str,
-		model: "text-devinci-002",
+		model: "text-davinci-002",
 		temperature: 0.5,
 		max_tokens: 4000,
 		top_p: 0.3,
