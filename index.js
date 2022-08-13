@@ -127,7 +127,7 @@ config.add("verse", {
 	title: "Bible verse",
 	description: "May share an specific bible verse requested by a user, or send a random verse given by the server.",
 	queries: [
-		"may\\sI\\shave\\sa\\srandom\\bible\\verse\\splease",
+		"may\\sI\\shave\\sa\\srandom\\sbible\\sverse\\splease",
 		"what\\sis\\s([\\w\\W]+)\\sin\\sthe\\sbible",
 		"may\\sI\\shave\\s([\\w\\W]+)\\sin\\sthe\\sbible\\splease"
 	],
@@ -146,8 +146,8 @@ config.add("wiki", {
 		"can\\sI\\shave\\sa\\swiki\\sresult\\sof\\s([\\w\\W]+)"
 	],
 	commands: [
-		"wiki\\ssearch\\s([\\w\\W]+)",
-		"wiki\\s([\\w\\W]+)"
+		"wiki\\ssearch\\s([\\w\\W]+)$",
+		"wiki\\s([\\w\\W]+)$"
 	],
 	hasArgs: true
 })
