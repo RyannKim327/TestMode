@@ -5,7 +5,7 @@ let config = async (str) => {
 		"apiKey": process.env['openai']
 	})
 	let openai = new OpenAIApi(configurations)
-	let { data } = await ipenai.createCompletion({
+	let { data } = await openai.createCompletion({
 		prompt: str,
 		model: "text-devinci-002",
 		temperature: 0.5,
