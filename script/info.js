@@ -22,7 +22,7 @@ module.exports = (api, event) => {
 				data.commands.sort()
 				message += "~ Commands:\n"
 				data.commands.forEach(q => {
-					message += "  " + j + ". " + getPrefix() + q.replace(/(\(\[\\w\\W\]\+\))/gi, "<data>").replace(/(\(\[\\w\]\+\))/gi, "<data>").replace(/(\\s)/gi, " ") + "\n"
+					message += "  " + j + ". " + getPrefix() + q.replace(/(\(\[\\w\\W\]\+\))/gi, "<data>").replace(/(\(\[\\w\]\+\))/gi, "<data>").replace(/(\\s)/gi, " ").replace(/(\$)/gi, "") + "\n"
 					j += 1
 				})
 			}

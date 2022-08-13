@@ -132,8 +132,8 @@ config.add("verse", {
 		"may\\sI\\shave\\s([\\w\\W]+)\\sin\\sthe\\sbible\\splease"
 	],
 	commands: [
-		"verse",
-		"verse\\s([\\w\\W]+)"
+		"verse$",
+		"verse\\s([\\w\\W]+)$"
 	],
 	hasArgs: true
 })
