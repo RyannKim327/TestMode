@@ -28,7 +28,7 @@ module.exports = async (api, event, regex) => {
 					type: "videoandaudio",
 					bitrate: "2500",
 					audioQuality: "highest",
-					loudnessDB: "20"
+					loudnessDB: "20",
 					audioBitrate: "550",
 					fps: "30"
 				})
