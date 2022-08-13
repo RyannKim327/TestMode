@@ -48,7 +48,7 @@ let getPrefix = () => {
 	return prefix
 }
 
-let cd = (api, event, cooldown, json) => {
+let cd = (api, event, cooldown, json, time) => {
 	if(cooldown && !admins.includes(event.senderID)){
 		json.cooldown[event.senderID] = true
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
@@ -56,7 +56,7 @@ let cd = (api, event, cooldown, json) => {
 			json.cooldown[event.senderID] = undefined
 			api.sendMessage("Cooldown done", event.threadID, event.messageID)
 			fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-		}, (1000 * 60))
+		}, (1000 * 60) * time)
 	}
 }
 
@@ -101,19 +101,19 @@ let system = (api, event, r, q, _prefix) => {
 			}else{
 				script = require("./script/" + r.script)
 				if(args){
-					cd(api, event, cooldown, json)
+					cd(api, event, cooldown, json, 1)
 					script(api, event, reg)
 				}else{
-					cd(api, event, cooldown, json)
+					cd(api, event, cooldown, json, 1)
 					script(api, event)
 				}
 			}
-			return "stop"
+			return false
 		}else{
-			return "ongoing"
+			return true
 		}
 	}else{
-		return "stop"
+		return false
 	}
 }
 
@@ -145,7 +145,7 @@ let start = (state) => {
 				let body = event.body
 				let body_lowercase = body.toLowerCase()
 				let name_lowercase = name.toLowerCase()
-				let loop = []
+				let loop = true
 				
 				let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 				if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
@@ -167,21 +167,26 @@ let start = (state) => {
 					api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
 				}else if(body_lowercase.startsWith(name_lowercase)){
 					commands.forEach(r => {
-						if(r.data.queries != undefined && loop.includes("stop")){
+						if(r.data.queries != undefined &&){
 							r.data.queries.forEach(q => {
-								let _prefix = name + ", "
-								loop.push(system(api, event, r, q, _prefix))
+								if(loop){
+									let _prefix = name + ", "
+									loop = system(api, event, r, q, _prefix)
+								}
 							})
 						}
 					})
-					if(!loop.includes("stop")){
+					if(loop && json.cooldown[event.senderID] == undefined){
 						openai(api, event)
+						cd(api, event, cooldown, json, 2)
 					}
 				}else if(body.startsWith(prefix)){
 					commands.forEach(r => {
-						if(r.data.commands != undefined && loop.includes("stop")){
+						if(r.data.commands != undefined &&){
 							r.data.commands.forEach(q => {
-								loop.push(system(api, event, r, q, prefix))
+								if(loop){
+									loop = system(api, event, r, q, prefix)
+								}
 							})
 						}
 					})
