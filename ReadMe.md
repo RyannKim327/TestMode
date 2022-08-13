@@ -1,12 +1,12 @@
-# JC Rios
+# Mikaella Aloa
 #### Developed by MPOP Reverse II
 ---
 
 ### About
-> JC Rios is a facebook bot developed by MPOP Reverse II, it is designed to try to help to students for their activities in school and to get know if they want to know someone. JC Rios is also a bot where he/she can share an everyday bible verses that might help you to turn back your life to God and to Jesus Christ.
+> Mikaella Aloa is a facebook bot developed by MPOP Reverse II, it is designed to try to help to students for their activities in school and to get know if they want to know someone. Mikaella Aloa is also a bot where she can share an everyday bible verses that might help you to turn back your life to God and to Jesus Christ.
 
 ### History
-> JC Rios was started to developed last weeks of January 2022. It was the project after the Front-end Editor project. It was originally named as Bhie Bot a virtual friend. JC Rios is named after our churchmate initials that leads into a logical name, wherein JC become Jesus Christ and Rios defines as river which pass and make a way into the lands.
+> Mikaella Aloa was started to developed last weeks of January 2022. It was the project after the Front-end Editor project. It was originally named as Bhie Bot a virtual friend and a successor name of JC Rios. Mikaella Aloa was one of my dummy names way back 2018, and this is a new name I used as I remembered this name before during the times wanna learn something.
 
 ### Developer
 > The developer of this bot don't want to give any details regarding his personal life. Also, he don't want to ask for any credits if ever that people want to use his/her projects for personal or commecial use, as if they have must make the project as an open-source project to help students to their school works, specially to share some knowledge.

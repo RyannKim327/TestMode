@@ -1,7 +1,7 @@
-const { commands, getPrefix, getName } = require("./../config")
+const { commands, getPrefix, getName, getFullName } = require("./../config")
 
 module.exports = (api, event) => {
-	let message = "Hello I am " + getName() + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"
+	let message = "Hello I am " + getFullName() + " you may also call me " + getName() + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"
 	let i = 1
 	message += "List of Commands:\n"
 	commands.forEach(r => {

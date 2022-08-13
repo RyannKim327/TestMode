@@ -11,6 +11,7 @@ let options = {
 let commands = []
 let prefix
 let name
+let fullname
 let admins = []
 
 let add = (script, data) => {
@@ -24,6 +25,9 @@ let add = (script, data) => {
 let setAdmins = (data) => {
 	admins.push(data)
 }
+let setFullName = (data) => {
+	fullname = data
+}
 let setName = (data) => {
 	name = data
 }
@@ -32,6 +36,9 @@ let setOptions = (data) => {
 }
 let setPrefix = (data) => {
 	prefix = data
+}
+letGetFullName = () => {
+	return fullname
 }
 let getName = () => {
 	return name
@@ -187,6 +194,7 @@ module.exports = {
 	start,
 	
 	commands,
+	getFullName,
 	getName,
 	getPrefix
 }

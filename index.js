@@ -123,6 +123,21 @@ config.add("toggle", {
 	admin: true
 })
 
+config.add("verse", {
+	title: "Bible verse",
+	description: "May share an specific bible verse requested by a user, or send a random verse given by the server.",
+	queries: [
+		"may\\sI\\shave\\sa\\srandom\\bible\\verse\\splease",
+		"what\\sis\\s([\\w\\W]+)\\sin\\sthe\\sbible"
+		"may\\sI\\shave\\s([\\w\\W]+)\\sin\\sthe\\sbible\\splease"
+	],
+	commands: [
+		"verse",
+		"verse\\s([\\w\\W]+)"
+	],
+	hasArgs: true
+})
+
 config.add("wiki", {
 	title: "Wikipedia Search",
 	description: "A simple search document which gives you a wikipedia based resukts.\nDisclaimer: Wikipedia is not so accurate so that if you were using this for research purposes, please don't continue it.",
@@ -151,7 +166,8 @@ config.add("dice", {
 })
 
 config.setPrefix("√")
-config.setName("Hally")
+config.setName("Mikay")
+config.setFullName("Mikaella Aloa")
 config.setOptions({
 	listenEvents: true,
 	selfListen: true,
