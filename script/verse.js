@@ -24,7 +24,7 @@ let verse = async(data) => {
 module.exports = async (api, event, regex) => {
 	let body = event.body.match(regex)[1]
 	let v = await verse(body)
-	let user = await api.getUserInfo(event.senderID]
+	let user = await api.getUserInfo(event.senderID)
 	let gender = g(user[event.senderID]['firstName'])['eng']
 	let message = `Here's your verse ${g} ${user[event.senderID]['name']}\n\n`
 	v.forEach(r => {
