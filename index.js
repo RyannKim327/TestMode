@@ -138,6 +138,19 @@ config.add("verse", {
 	hasArgs: true
 })
 
+config.add("video", {
+	title: "Youtube Video Command",
+	description: "This will send the top search result video from youtube platform.",
+	queries: [
+		"play\\sthe\\svideo\\s([\\w\\W]+)\\splease",
+		"please\\splay\\sthe\\svideo\\s([\\w\\W]+)"
+	],
+	commands: [
+		"video\\s([\\w\\W]+)$"
+	],
+	hasArgs: true
+})
+
 config.add("wiki", {
 	title: "Wikipedia Search",
 	description: "A simple search document which gives you a wikipedia based resukts.\nDisclaimer: Wikipedia is not so accurate so that if you were using this for research purposes, please don't continue it.",

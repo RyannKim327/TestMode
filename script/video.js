@@ -4,7 +4,7 @@ const fs = require("fs")
 const gender = require("./../utils/gender")
 
 module.exports = async (api, event, regex) => {
-	let name = `${__dirname}/../${event.threadID}.mp3`
+	let name = `${__dirname}/../${event.threadID}.mp4`
 	if(fs.existsSync(name)){
 		api.sendMessage("Lemme finish the earlier request please.", event.threadID)
 	}else{
@@ -20,14 +20,17 @@ module.exports = async (api, event, regex) => {
 				if(info.title == undefined){
 					api.sendMessage("An Error Occured", event.threadID)
 				}
-				let file = fs.createWriteStream(`${event.threadID}.mp3`)
+				let file = fs.createWriteStream(`${event.threadID}.mp4`)
 				let message = ""
 				let f = youtube.download(result.videos[0].id, {
 					format: "mp4",
-					quality: "tiny",
-					type: "audio",
-					audioQuality: "lowest",
-					audioBitrate: "550"
+					quality: "480p",
+					type: "videoandaudio",
+					bitrate: "2500",
+					audioQuality: "highest",
+					loudnessDB: "20"
+					audioBitrate: "550",
+					fps: "30"
 				})
 				f.pipe(file)
 				f.on("start", () => {
@@ -41,7 +44,7 @@ module.exports = async (api, event, regex) => {
 					let username = user[event.senderID]['name']
 					let firstName = user[event.senderID]['firstName']
 					let g = gender(firstName)['eng']
-					message += `Here's your request ${g} ${username}. A song entitled ${info.title}, uploaded by ${info.metadata.channel_name} on a platform called youtube.`
+					message += `Here's your request ${g} ${username}. A video entitled ${info.title}, uploaded by ${info.metadata.channel_name} on a platform called youtube.`
 					api.sendMessage({
 						body: message,
 						attachment: fs.createReadStream(name).on("end", async () => {
