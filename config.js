@@ -108,12 +108,12 @@ let system = (api, event, r, q, _prefix) => {
 					script(api, event)
 				}
 			}
-			return false
+			return "stop"
 		}else{
-			return true
+			return "ongoing"
 		}
 	}else{
-		return false
+		return "stop"
 	}
 }
 
@@ -145,7 +145,7 @@ let start = (state) => {
 				let body = event.body
 				let body_lowercase = body.toLowerCase()
 				let name_lowercase = name.toLowerCase()
-				let loop = true
+				let loop = []
 				
 				let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 				if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
@@ -167,21 +167,21 @@ let start = (state) => {
 					api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
 				}else if(body_lowercase.startsWith(name_lowercase)){
 					commands.forEach(r => {
-						if(r.data.queries != undefined && loop){
+						if(r.data.queries != undefined && loop.includes("stop")){
 							r.data.queries.forEach(q => {
 								let _prefix = name + ", "
-								loop = system(api, event, r, q, _prefix)
+								loop.push(system(api, event, r, q, _prefix))
 							})
 						}
 					})
-					if(loop){
+					if(!loop.includes("stop")){
 						openai(api, event)
 					}
 				}else if(body.startsWith(prefix)){
 					commands.forEach(r => {
-						if(r.data.commands != undefined && loop){
+						if(r.data.commands != undefined && loop.includes("stop")){
 							r.data.commands.forEach(q => {
-								loop = system(api, event, r, q, prefix)
+								loop.push(system(api, event, r, q, prefix))
 							})
 						}
 					})
