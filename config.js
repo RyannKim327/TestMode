@@ -174,7 +174,7 @@ let start = (state) => {
 							})
 						}
 					})
-					if(x <= 0){
+					if(x == 0){
 						openai(api, event)
 					}
 				}else if(body.startsWith(prefix)){
