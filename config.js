@@ -2,6 +2,7 @@ const fca = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
+const openai = require("./auto/openai")
 const regex = require("./utils/regex")
 
 let options = {
@@ -163,14 +164,19 @@ let start = (state) => {
 				if(body_lowercase == name_lowercase){
 					api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
 				}else if(body_lowercase.startsWith(name_lowercase)){
+					let x = 0
 					commands.forEach(r => {
 						if(r.data.queries != undefined && loop){
 							r.data.queries.forEach(q => {
 								let _prefix = name + ", "
+								x += 1
 								loop = system(api, event, r, q, _prefix)
 							})
 						}
 					})
+					if(x <= 0){
+						openai(api, event)
+					}
 				}else if(body.startsWith(prefix)){
 					commands.forEach(r => {
 						if(r.data.commands != undefined && loop){
