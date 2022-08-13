@@ -2,7 +2,7 @@ const { Configuration, OpenAIApi } = require("openai")
 
 let config = async (str) => {
 	let configurations = new Configuration({
-		"apiKey": "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"
+		"apiKey": process.env['openai']
 	})
 	let openai = new OpenAIApi(configurations)
 	let { data } = await ipenai.createCompletion({
