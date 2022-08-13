@@ -128,7 +128,7 @@ config.add("verse", {
 	description: "May share an specific bible verse requested by a user, or send a random verse given by the server.",
 	queries: [
 		"may\\sI\\shave\\sa\\srandom\\bible\\verse\\splease",
-		"what\\sis\\s([\\w\\W]+)\\sin\\sthe\\sbible"
+		"what\\sis\\s([\\w\\W]+)\\sin\\sthe\\sbible",
 		"may\\sI\\shave\\s([\\w\\W]+)\\sin\\sthe\\sbible\\splease"
 	],
 	commands: [
