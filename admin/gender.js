@@ -51,6 +51,17 @@ module.exports = async (api, event, regex) => {
 	}
 	fs.writeFileSync("data/gender.json", JSON.stringify(json), "utf8")
 	api.sendMessage("New name registered.", event.threadID)
+	
+	let objs = Object.keys(json)
+	let msg = "{"
+	objs.sort()
+	objs.forEach(r => {
+		msg += `\t"${r}": ${json[r]},\n`
+	})
+	
+	msg += "}"
+	
 	let self = await api.getCurrentUserID()
 	api.sendMessage(fs.readFileSync("data/gender.json", "utf8"), self)
+	
 }
