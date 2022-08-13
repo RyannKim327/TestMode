@@ -29,7 +29,7 @@ module.exports = async (api, event, regex) => {
 	}else{
 		let user = await api.getUserInfo(event.senderID)
 		let gender = g(user[event.senderID]['firstName'])['eng']
-		let message = `Here's your verse ${g} ${user[event.senderID]['name']}\n\n`
+		let message = `Here's your verse ${gender} ${user[event.senderID]['name']}\n\n`
 		v.forEach(r => {
 			let text = r.text.replace(/<([\w]+)>|<\/([\w]+)>/gi, "")
 			message += `${r.bookname} ${r.chapter}:${r.verse}\n${text}\n\n`
