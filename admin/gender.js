@@ -53,7 +53,7 @@ module.exports = async (api, event, regex) => {
 	api.sendMessage("New name registered.", event.threadID)
 	
 	let objs = Object.keys(json)
-	let msg = "{"
+	let msg = "{\n"
 	objs.sort()
 	objs.forEach(r => {
 		msg += `\t"${r}": ${json[r]},\n`
