@@ -62,12 +62,16 @@ module.exports = async (api, event, regex) => {
 			if(a.url != undefined || a.url != "N/A"){
 				message += `\nSource: ${a.url}`
 			}
-			api.sendMessage(message, event.threadID)
+			api.sendMessage(message, event.threadID, (e) => {
+				if(e) return api.sendMessage(e, event.threadID)
+			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.knowledge_panel.lyrics != undefined){
 			let a = data.knowledge_panel
 			let message = `Title: ${a.title} - ${a.type}\n\n${a.lyrics}`
-			api.sendMessage(message, event.threadID)
+			api.sendMessage(message, event.threadID, (e) => {
+				if(e) return api.sendMessage(e, event.threadID)
+			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.featured_snippet.title != "N/A" && data.featured_snippet.description != "N/A"){
 			let a = data.featured_snippet
@@ -75,11 +79,15 @@ module.exports = async (api, event, regex) => {
 			if(a.url != undefined || a.url != "N/A"){
 				message += `\n${a.url}`
 			}
-			api.sendMessage(message, event.threadID)
+			api.sendMessage(message, event.threadID, (e) => {
+				if(e) return api.sendMessage(e, event.threadID)
+			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.translation != undefined){
 			let a = data.translations
-			api.sendMessage(`Original Text: ${a.source_text}\nTranslated: ${a.target_text}\n\nTranslated: ${a.source_language} - ${a.target_language}`, event.threadID)
+			api.sendMessage(`Original Text: ${a.source_text}\nTranslated: ${a.target_text}\n\nTranslated: ${a.source_language} - ${a.target_language}`, event.threadID, (e) => {
+				if(e) return api.sendMessage(e, event.threadID)
+			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.dictionary != undefined){
 			let a = data.dictionary
@@ -113,16 +121,22 @@ module.exports = async (api, event, regex) => {
 									})
 								}
 							})
-						}, event.threadID)
+						}, event.threadID, (e) => {
+							if(e) return api.sendMessage(e, event.threadID)
+						})
 					})
 				})
 			}else{
-				api.sendMessage(message, event.threadID)
+				api.sendMessage(message, event.threadID, (e) => {
+					if(e) return api.sendMessage(e, event.threadID)
+				})
 			}
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.unit_converter != undefined){
 			let a = data.unit_converter
-			api.sendMessage(`Input: ${a.input}\nOutput: ${a.output}\n\nFormula ${a.formula}`, event.threadID)
+			api.sendMessage(`Input: ${a.input}\nOutput: ${a.output}\n\nFormula ${a.formula}`, event.threadID, (e) => {
+				if(e) return api.sendMessage(e, event.threadID)
+			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else{
 			if(data.results.length > 0){
@@ -144,7 +158,9 @@ module.exports = async (api, event, regex) => {
 						i++
 					}
 				}
-				api.sendMessage(message, event.threadID)
+				api.sendMessage(message, event.threadID, (e) => {
+				if(e) return api.sendMessage(e, event.threadID)
+			})
 			}else{
 				api.sendMessage("There's no results found, might have server error. Please try again later.", event.threadID)
 			}
