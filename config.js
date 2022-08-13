@@ -188,6 +188,7 @@ let start = (state) => {
 module.exports = {
 	add,
 	setAdmins,
+	setFullName,
 	setName,
 	setOptions,
 	setPrefix,
