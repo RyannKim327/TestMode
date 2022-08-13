@@ -37,7 +37,7 @@ let setOptions = (data) => {
 let setPrefix = (data) => {
 	prefix = data
 }
-letGetFullName = () => {
+let getFullName = () => {
 	return fullname
 }
 let getName = () => {
