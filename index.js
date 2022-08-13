@@ -32,7 +32,7 @@ config.add("baybayin", {
 
 config.add("busy", {
 	title: "Busy Mode",
-	description: "For admin",
+	description: "Setup by an admin during busy.",
 	commands: [
 		"busy"
 	],
@@ -41,7 +41,7 @@ config.add("busy", {
 
 config.add("gender", {
 	title: "Add new Gender",
-	description: "For admin use.",
+	description: "Setup by an admin to add a new name data with gender..",
 	commands: [
 		"gender\\s([\\w]+)\\sas\\s([\\w]+)"
 	],
@@ -88,8 +88,8 @@ config.add("music", {
 })
 
 config.add("off", {
-	title: "Off Command",
-	description: "For admin use",
+	title: "Off/On Bot Feature",
+	description: "Setup by an admin to enable/disable the bot commands in a particular group or person.",
 	commands: [
 		"off",
 		"on"
@@ -103,7 +103,7 @@ config.add("off", {
 
 config.add("pin", {
 	title: "Pin a message",
-	description: "For admin use",
+	description: "Setup a pinned message, or show the pinned message.",
 	commands: [
 		"pin"
 	],

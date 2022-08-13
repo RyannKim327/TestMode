@@ -19,5 +19,11 @@ module.exports = async (api, event, regex) => {
 	let name = user[userID].name
 	let fname = user[userID].firstName
 	let g = gender(fname)['eng']
-	api.sendMessage(`The text "${_regex[1]}" in baybayin ${g} ${name} is "${data.baybay}".`, event.threadID)
+	api.sendMessage({
+		body: `The text "${_regex[1]}" in baybayin ${g} ${name} is "${data.baybay}".`,
+		mentions: [{
+			id: userID,
+			tag: name
+		}]
+	}, event.threadID)
 }

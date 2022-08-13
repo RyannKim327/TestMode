@@ -3,7 +3,7 @@ const fs = require("fs")
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let body = event.body.toLowerCase()
-	if(body == "√on"){
+	if((json.off.includes(event.threadID) || json.off.includes(event.senderID)) && body == "√on"){
 		if(event.type == "message_reply"){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)
@@ -23,7 +23,7 @@ module.exports = async (api, event) => {
 				body: `Bot actions are now enabled for ${thread.threadName}`
 			}, event.threadID)
 		}
-	}else if(body == "√off"){
+	}else if((!json.off.includes(event.threadID) || !json.off.includes(event.senderID)) && body == "√off"){
 		if(event.type == "message_reply"){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)

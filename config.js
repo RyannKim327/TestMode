@@ -1,6 +1,7 @@
 const fca = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("./cron/start")
+const cron_api = require("./cron/api")
 const regex = require("./utils/regex")
 
 let options = {
@@ -118,6 +119,7 @@ let start = (state) => {
 		})
 		
 		cron(api)
+		cron_api(api)
 		
 		api.setOptions(options)
 		api.listen(async (error, event) => {
@@ -151,7 +153,9 @@ let start = (state) => {
 					}
 				}
 				
-				if(body_lowercase.startsWith(name_lowercase)){
+				if(body_lowercase == name_lowercase){
+					api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
+				}else if(body_lowercase.startsWith(name_lowercase)){
 					commands.forEach(r => {
 						if(r.data.queries != undefined && loop){
 							r.data.queries.forEach(q => {
