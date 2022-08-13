@@ -112,6 +112,8 @@ let system = (api, event, r, q, _prefix) => {
 		}else{
 			return true
 		}
+	}else{
+		return false
 	}
 }
 
