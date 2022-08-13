@@ -6,7 +6,7 @@ let verse = async(data) => {
 		let result = await axios.get("https://labs.bible.org/api/?passage=random&type=json").then(r => {
 			return r.data
 		}).catch(e => {
-			console.error(`Error [Axios Verse]: ${e}`
+			console.error(`Error [Axios Verse]: ${e}`)
 			return null
 		})
 		return result
@@ -14,7 +14,7 @@ let verse = async(data) => {
 		let result = await axios.get("https://labs.bible.org/api/?passage=" + data + "&type=json").then(r => {
 			return r.data
 		}).catch(e => {
-			console.error(`Error [Axios Verse]: ${e}`
+			console.error(`Error [Axios Verse]: ${e}`)
 			return null
 		})
 		return result
