@@ -62,6 +62,6 @@ module.exports = async (api, event, regex) => {
 	msg += "}"
 	
 	let self = await api.getCurrentUserID()
-	api.sendMessage(fs.readFileSync("data/gender.json", "utf8"), self)
+	api.sendMessage(mgs, self)
 	
 }
