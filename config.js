@@ -1,7 +1,7 @@
 const fca = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("./cron/start")
-const cron_api = require("./cron/api")
+//const cron_api = require("./cron/api")
 const openai = require("./auto/openai")
 const regex = require("./utils/regex")
 
@@ -129,7 +129,7 @@ let start = (state) => {
 		})
 		
 		cron(api)
-		cron_api(api)
+		//cron_api(api)
 		
 		api.setOptions(options)
 		api.listen(async (error, event) => {
