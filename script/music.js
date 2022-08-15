@@ -62,7 +62,7 @@ module.exports = async (api, event, regex) => {
 				})
 			}
 		}else{
-			api.sendMessage("There is no results found.", event. threadID)
+			api.sendMessage("There is no results found.", event.threadID)
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}
 	}
