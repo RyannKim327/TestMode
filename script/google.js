@@ -68,7 +68,8 @@ module.exports = async (api, event, regex) => {
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.knowledge_panel.lyrics != undefined){
 			let a = data.knowledge_panel
-			let message = `Title: ${a.title} - ${a.type}\n\n${a.lyrics}`
+			let by = a.type.match(/Song\sby\s([\w\W]+)/)[1]
+			let message = `Title: ${a.title} - ${by}\n\n${a.lyrics}`
 			api.sendMessage(message, event.threadID, (e) => {
 				if(e) return api.sendMessage(e, event.threadID)
 			})
