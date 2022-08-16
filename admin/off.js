@@ -7,7 +7,10 @@ module.exports = async (api, event) => {
 		if(event.type == "message_reply"){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)
-			json.off = json.off.replace(id + ", ", "")
+			let x = json.off.join(", ")
+			x = x.replace(id + ", ", "")
+			x = x.replace(", " + id, "")
+			json.off = x.split(", ")
 			api.sendMessage({
 				body: `Bot actions are now enabled for ${user[id]['name']}`,
 				mentions: [{
@@ -27,7 +30,7 @@ module.exports = async (api, event) => {
 		if(event.type == "message_reply"){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)
-			json.off += id + ", "
+			json.off.push(id)
 			api.sendMessage({
 				body: `Bot actions are now disabled for ${user[id]['name']}`,
 				mentions: [{
