@@ -34,7 +34,8 @@ config.add("busy", {
 	title: "Busy Mode",
 	description: "Setup by an admin during busy.",
 	commands: [
-		"busy"
+		"busy",
+		"clearbusy"
 	],
 	admin: true
 })
