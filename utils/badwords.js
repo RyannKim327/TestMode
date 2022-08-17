@@ -1,4 +1,4 @@
-const {read} = require(".database")
+const {read} = require("./database")
 
 module.exports = (text) => {
 	let data = read //JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
