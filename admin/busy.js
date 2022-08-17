@@ -1,6 +1,7 @@
 const fs = require("fs")
+const { write } = require("./../utils/database")
 
-module.exports = (api, event) => {
+module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	if(event.body == "√clearbusy" && json.busy){
 		json.busylist = []
@@ -17,4 +18,6 @@ module.exports = (api, event) => {
 		}
 	}
 	fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+	let d = await write(json)
+	console.log(d)
 }

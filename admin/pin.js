@@ -1,4 +1,5 @@
 const fs = require("fs")
+const { write } = require("./../utils/database")
 
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
@@ -16,6 +17,8 @@ module.exports = async (api, event) => {
 			api.sendMessage("New pinned message.", event.threadID, event.messageReply.messageID)
 		}
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+		let d = await write(json)
+		console.log(d)
 	}else{
 		if(json.pin.message[event.threadID] == undefined){
 			api.sendMessage("There is no pinned message here.", event.threadID)

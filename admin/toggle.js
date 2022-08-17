@@ -1,6 +1,7 @@
 const fs = require("fs")
+const { write } = require("./../utils/database")
 
-module.exports = (api, event) => {
+module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	json.status = !json.status
 	if(json.status){
@@ -9,4 +10,6 @@ module.exports = (api, event) => {
 		api.sendMessage("Bot service for non vip users is now deactivated.", event.threadID)
 	}
 	fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+	let data = await write(json)
+	console.log(data)
 }

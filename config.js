@@ -4,6 +4,7 @@ const cron = require("./cron/start")
 //const cron_api = require("./cron/api")
 const openai = require("./auto/openai")
 const bw = require("./utils/badwords")
+const { read } = require("./utils/database")
 const regex = require("./utils/regex")
 
 let options = {
@@ -126,6 +127,10 @@ let start = (state) => {
 		if(error) return console.error(`Error [API]: ${error}`)
 		
 		const self = await api.getCurrentUserID()
+		
+		let db_read = await read()
+		fs.writeFileSync("data/preferences.json", JSON.stringify(db_read), "utf8")
+		
 		if(options.selfListen)
 			admins.push(self)
 		admins.forEach(id => {
