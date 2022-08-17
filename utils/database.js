@@ -11,7 +11,7 @@ let read = async () => {
 }
 
 let write = async (data) => {
-	let result = await axios.get("https://mikayserver.ultramicrospectrophotometer.repl.co/write?key=" + process.env['key'] + "&json=" + data).then(r => {
+	let result = await axios.get("https://mikayserver.ultramicrospectrophotometer.repl.co/write?key=" + process.env['key'] + "&json=" + JSON.stringify(data)).then(r => {
 		return r.data
 	}).catch(e => {
 		console.error(`Error [Database W]: ${e}`)
