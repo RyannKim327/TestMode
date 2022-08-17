@@ -129,7 +129,8 @@ let start = (state) => {
 		const self = await api.getCurrentUserID()
 		
 		let db_read = await read()
-		fs.writeFileSync("data/preferences.json", JSON.stringify(db_read), "utf8")
+		if(db_read != null)
+			fs.writeFileSync("data/preferences.json", JSON.stringify(db_read), "utf8")
 		
 		if(options.selfListen)
 			admins.push(self)
