@@ -1,7 +1,7 @@
-const fs = require("fs")
+const {read} = require(".database")
 
 module.exports = (text) => {
-	let data = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+	let data = read //JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let _ = text.toLowerCase()
 	let _data = _.split(/\s/)
 	let output = true

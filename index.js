@@ -149,7 +149,8 @@ config.add("video", {
 	commands: [
 		"video\\s([\\w\\W]+)$"
 	],
-	hasArgs: true
+	hasArgs: true,
+	cd: 2.5
 })
 
 config.add("wiki", {

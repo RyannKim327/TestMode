@@ -67,6 +67,7 @@ let system = (api, event, r, q, _prefix) => {
 	let admin = false
 	let args = false
 	let game = false
+	let _cd = 1
 	let type = ["message"]
 	let reg = regex(_prefix + q)
 	if(r.data.admin != undefined)
@@ -79,6 +80,8 @@ let system = (api, event, r, q, _prefix) => {
 		game = r.data.game
 	if(r.data.type != undefined)
 		type = r.data.type
+	if(r.data.cd != undefined)
+		_cd = r.data.cd
 	
 	if(json.cooldown[event.senderID] == undefined){
 		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && bw(event.body)) || admins.includes(event.senderID))){
@@ -102,10 +105,10 @@ let system = (api, event, r, q, _prefix) => {
 			}else{
 				script = require("./script/" + r.script)
 				if(args){
-					cd(api, event, cooldown, json, 1)
+					cd(api, event, cooldown, json, _cd)
 					script(api, event, reg)
 				}else{
-					cd(api, event, cooldown, json, 1)
+					cd(api, event, cooldown, json, _cd)
 					script(api, event)
 				}
 			}
