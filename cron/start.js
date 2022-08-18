@@ -6,7 +6,7 @@ const verse = require("./verse")
 
 module.exports = (api) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	cronjob.schedule("0 7 * * *", () => {
+	cronjob.schedule("0 8 * * *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
 			if(e) return console.error(`Error [Cron ThreadList]: ${e}`)
 			let i = 0
