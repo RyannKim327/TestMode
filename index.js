@@ -198,7 +198,7 @@ config.add("flames", {
 	description: "A game or just for fun feature that recognized your relationship status with your crush.",
 	commands: [
 		"flames$",
-		"flames\\s([\\w\\W]+)$"
+		"flames\\s([\\w\\W]+)$",
 		"flames\\s([\\w\\W]+)\\sand\\s([\\w\\W]+)$"
 	],
 	type: [
