@@ -14,7 +14,7 @@ let quote = async () => {
 
 module.exports = async (api) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	cron.schedule("* */3 * * *", async () => {
+	cron.schedule("* 0/6 * * *", async () => {
 		let quotes = await quote()
 		api.getThreadList(20, null, ['INBOX'], async (error, data) => {
 			let sent = 5
