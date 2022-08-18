@@ -60,7 +60,8 @@ config.add("google", {
 	commands: [
 		"google\\s([\\w\\W]+)"
 	],
-	hasArgs: true
+	hasArgs: true,
+	cd: 3
 })
 
 config.add("guitar", {
@@ -150,7 +151,7 @@ config.add("video", {
 		"video\\s([\\w\\W]+)$"
 	],
 	hasArgs: true,
-	cd: 2.5
+	cd: 5
 })
 
 config.add("wiki", {
