@@ -27,9 +27,20 @@ module.exports = async (api, event) => {
 			x = x.replace(id + ", ", "")
 			x = x.replace(", " + id, "")
 			json.off = x.split(", ")
-			api.sendMessage({
-				body: `Bot actions are now enabled for ${thread.threadName}`
-			}, event.threadID)
+			if(thread.isGroup){
+				api.sendMessage({
+					body: `Bot actions are now enabled for ${thread.threadName}`
+				}, event.threadID)
+			}else{
+				let user = await api.getUserInfo(id)
+				api.sendMessage({
+					body: `Bot actions are now enabled for ${user[id]['name']}`,
+					mentions: [{
+						id,
+						tag: user[id]['name']
+					}]
+				}, event.threadID)
+			}
 		}
 	}else if(body == "√off"){
 		if(event.type == "message_reply" && !json.off.includes(event.messageReply.senderID)){
@@ -47,9 +58,20 @@ module.exports = async (api, event) => {
 			let id = event.threadID
 			let thread = await api.getThreadInfo(id)
 			json.off.push(id)
-			api.sendMessage({
-				body: `Bot actions are now disabled for ${thread.threadName}`
-			}, event.threadID)
+			if(thread.isGroup){
+				api.sendMessage({
+					body: `Bot actions are now disabled for ${thread.threadName}`
+				}, event.threadID)
+			}else{
+				let user = await api.getUserInfo(id)
+				api.sendMessage({
+					body: `Bot actions are now disabled for ${user[id]['name']}`,
+					mentions: [{
+						id,
+						tag: user[id]['name']
+					}]
+				}, event.threadID)
+			}
 		}
 	}
 	fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
