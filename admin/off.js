@@ -7,7 +7,8 @@ module.exports = async (api, event) => {
 		if(event.type == "message_reply"){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)
-			let x = json.off.join(", ")
+			let off = json.off
+			let x = off.join(", ")
 			x = x.replace(id + ", ", "")
 			x = x.replace(", " + id, "")
 			json.off = x.split(", ")
