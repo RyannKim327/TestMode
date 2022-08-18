@@ -167,7 +167,7 @@ config.add("wiki", {
 	hasArgs: true
 })
 
-confif.add("answer", {
+config.add("answer", {
 	title: "Answer in a game",
 	description: "This must be your response if you want to answer in your game.",
 	queries: [
