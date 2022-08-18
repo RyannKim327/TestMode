@@ -46,7 +46,7 @@ module.exports = async (api, event) => {
 		}else if(event.type == "message" && !json.off.includes(event.threadID)){
 			let id = event.threadID
 			let thread = await api.getThreadInfo(id)
-			json.off += id + ", "
+			json.off.push(id)
 			api.sendMessage({
 				body: `Bot actions are now disabled for ${thread.threadName}`
 			}, event.threadID)
