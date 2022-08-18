@@ -167,6 +167,19 @@ config.add("wiki", {
 	hasArgs: true
 })
 
+confif.add("answer", {
+	title: "Answer in a game",
+	description: "This must be your response if you want to answer in your game.",
+	queries: [
+		"my\\sanswer\\sis\\s([\\w\\W]+)"
+	],
+	commands: [
+		"answer\\s([\\w\\W]+)"
+	],
+	game: true,
+	hasArgs: true,
+})
+
 config.add("dice", {
 	title: "Roll A Die Game",
 	description: "A simple random with vs players or vs computer.",
@@ -178,6 +191,22 @@ config.add("dice", {
 		"message_reply"
 	],
 	game: true
+})
+
+config.add("flames", {
+	title: "Flames",
+	description: "A game or just for fun feature that recognized your relationship status with your crush.",
+	commands: [
+		"flames$",
+		"flames\\s([\\w\\W]+)$"
+		"flames\\s([\\w\\W]+)\\sand\\s([\\w\\W]+)$"
+	],
+	type: [
+		"message",
+		"message_reply"
+	],
+	game: true,
+	hasArgs: true
 })
 
 config.setPrefix("√")

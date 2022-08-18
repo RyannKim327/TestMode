@@ -1,16 +1,17 @@
 const fca = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("./cron/start")
-//const cron_api = require("./cron/api")
+const cron_api = require("./cron/api")
 const openai = require("./auto/openai")
 const bw = require("./utils/badwords")
-const { read } = require("./utils/database")
+//const { read } = require("./utils/database")
 const regex = require("./utils/regex")
 
 let options = {
 	listenEvents: true,
 	selfListen: false
 }
+
 let commands = []
 let prefix
 let name
@@ -128,10 +129,10 @@ let start = (state) => {
 		
 		const self = await api.getCurrentUserID()
 		
-		let db_read = await read()
+		/*let db_read = await read()
 		if(db_read != null)
 			fs.writeFileSync("data/preferences.json", JSON.stringify(db_read), "utf8")
-		
+		*/
 		if(options.selfListen)
 			admins.push(self)
 		admins.forEach(id => {
@@ -139,7 +140,7 @@ let start = (state) => {
 		})
 		
 		cron(api)
-		//cron_api(api)
+		cron_api(api)
 		
 		api.setOptions(options)
 		api.listen(async (error, event) => {
@@ -189,7 +190,7 @@ let start = (state) => {
 					if(loop && json.cooldown[event.senderID] == undefined){
 						let cooldown = true
 						openai(api, event)
-						cd(api, event, cooldown, json, 2)
+						cd(api, event, cooldown, json, 5)
 					}
 				}else if(body.startsWith(prefix)){
 					commands.forEach(r => {
