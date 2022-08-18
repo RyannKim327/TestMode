@@ -69,7 +69,7 @@ let system = (api, event, r, q, _prefix) => {
 	let admin = false
 	let args = false
 	let game = false
-	let _cd = 1
+	let _cd = 1.5
 	let type = ["message"]
 	let reg = regex(_prefix + q)
 	if(r.data.admin != undefined)

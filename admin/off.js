@@ -1,5 +1,4 @@
 const fs = require("fs")
-const { write } = require("./../utils/database")
 
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
@@ -49,6 +48,4 @@ module.exports = async (api, event) => {
 		}
 	}
 	fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-	let d = await write(json)
-	console.log(d)
 }
