@@ -1,4 +1,5 @@
 const axios = require("axios")
+const fs = require("fs")
 const cron = require("node-cron")
 
 let quote = async () => {
@@ -12,6 +13,7 @@ let quote = async () => {
 }
 
 module.exports = async (api) => {
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	cron.schedule("* */3 * * *", async () => {
 		let quotes = await quote()
 		api.getThreadList(20, null, ['INBOX'], async (error, data) => {
