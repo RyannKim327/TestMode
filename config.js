@@ -187,7 +187,7 @@ let start = (state) => {
 							})
 						}
 					})
-					if(loop && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID)){
+					if(loop && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID))){
 						let cooldown = true
 						openai(api, event)
 						cd(api, event, cooldown, json, 5)
