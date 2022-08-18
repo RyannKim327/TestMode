@@ -34,8 +34,8 @@ module.exports = async (api, event, regex) => {
 
 	let data = event.body
 	let reg = data.match(regex)
-	let name = reg[1].replace(/([\W]+)/i, "")
-	let crush = reg[2].replace(/([\W]+)/i, "")
+	let name = reg[1]
+	let crush = reg[2]
 	if(event.type == "message_reply"){
 		let user = await api.getUserInfo(event.messageReply.senderID)
 		crush = user[event.messageReply.senderID]['name']
