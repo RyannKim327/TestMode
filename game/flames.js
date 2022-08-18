@@ -49,6 +49,8 @@ module.exports = async (api, event, regex) => {
 			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID)
 		}
 	}else{
+		console.log(name)
+		console.log(crush)
 		if(name != undefined && crush != undefined){
 			let result = doFLAMES(name, crush)
 			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID)
