@@ -3,8 +3,8 @@ const fs = require("fs")
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let body = event.body.toLowerCase()
-	if((json.off.includes(event.threadID) || json.off.includes(event.senderID)) && body == "√on"){
-		if(event.type == "message_reply"){
+	if((json.off.includes(event.threadID) || json.off.includes(event.messageReply.senderID)) && body == "√on"){
+		if(event.type == "message_reply" && json.off.includes(event.messageReply.senderID)){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)
 			let off = json.off
@@ -19,16 +19,20 @@ module.exports = async (api, event) => {
 					tag: user[id]['name']
 				}]
 			}, event.threadID)
-		}else{
+		}else if(event.type == "message" && !json.off.includes(event.threadID)){
 			let id = event.threadID
 			let thread = await api.getThreadInfo(id)
-			json.off = json.off.replace(id + ", ", "")
+			let off = json.off
+			let x = off.join(", ")
+			x = x.replace(id + ", ", "")
+			x = x.replace(", " + id, "")
+			json.off = x.split(", ")
 			api.sendMessage({
 				body: `Bot actions are now enabled for ${thread.threadName}`
 			}, event.threadID)
 		}
-	}else if((!json.off.includes(event.threadID) || !json.off.includes(event.senderID)) && body == "√off"){
-		if(event.type == "message_reply"){
+	}else if((!json.off.includes(event.threadID) || !json.off.includes(event.messageReply.senderID)) && body == "√off"){
+		if(event.type == "message_reply" && !json.off.includes(event.messageReply.senderID)){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)
 			json.off.push(id)
@@ -39,7 +43,7 @@ module.exports = async (api, event) => {
 					tag: user[id]['name']
 				}]
 			}, event.threadID)
-		}else{
+		}else if(event.type == "message" && !json.off.includes(event.threadID)){
 			let id = event.threadID
 			let thread = await api.getThreadInfo(id)
 			json.off += id + ", "
