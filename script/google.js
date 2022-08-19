@@ -140,6 +140,9 @@ module.exports = async (api, event, regex) => {
 				if(e) return api.sendMessage(e, event.threadID)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
+		}else if(data.weather != undefined){
+			let a = data.weather
+			api.sendMessage(`Location: ${a.location}\nForecast: ${a.forecast}\nPrecipitation: ${a.precipitation}\nHumidity: ${a.humidity}\nTemperature: ${a.temperature}\nWind speed: ${a.wind}`, event.threadID)
 		}else{
 			if(data.results.length > 0){
 				let a = data.results
