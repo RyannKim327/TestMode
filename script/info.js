@@ -1,6 +1,31 @@
 const { commands, getPrefix, getName, getFullName } = require("./../config")
 
 module.exports = (api, event) => {
+	let creds = [
+		"Salvador",
+		"John Jeremy Antiguo",
+		"Earl Shine Sawir",
+		"John Paul Caigas",
+		"John Roy Lapida Calimlim",
+		"Lester Navarra",
+		"Jerson Carin",
+		"Rovie Francisco",
+		"Ken Jovenie Samonte",
+		"Mark Kevin Manalo",
+		"Mart Anthony Salazar",
+		"Eljohn Mago",
+		"Jovanny De Leon",
+		"LuanRT",
+		"Schemavery",
+		"VanBanLaNhat",
+		"Labs Bible",
+		"Zenquotes",
+		"AnimeQuotes",
+		"OpenAI",
+		"Tabs Ultimate Guitar",
+		"DroidModifs",
+		"And to all developers of the API used for this project."
+	]
 	let message = "Hello I am " + getFullName() + " you may also call me " + getName() + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"
 	let i = 1
 	message += "List of Commands:\n"
@@ -45,6 +70,11 @@ module.exports = (api, event) => {
 			message += "\n"
 			i += 1
 		}
+	})
+	message += "\nCredits to the following:\n"
+	i = 1
+	creds.forEach(r => {
+		message += 1 + ". " + r + "\n"
 	})
 	api.sendMessage(message, event.threadID)
 }
