@@ -28,6 +28,7 @@ module.exports = async (api, event, regex) => {
 		if(data.did_you_mean != undefined){
 			api.sendMessage(`Did you mean: ${data.did_you_mean}.`, event.threadID)
 		}
+		console.log(data)
 		if(data.knowledge_panel.title != "N/A" && data.knowledge_panel.lyrics == undefined && (data.knowledge_panel.description != "N/A" || data.featured_snippet.description != "N/A")){
 			let a = data.knowledge_panel
 			let objs = Object.keys(a)
