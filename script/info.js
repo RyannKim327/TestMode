@@ -74,7 +74,7 @@ module.exports = (api, event) => {
 	message += "\nCredits to the following:\n"
 	i = 1
 	creds.forEach(r => {
-		message += 1 + ". " + r + "\n"
+		message += i + ". " + r + "\n"
 		i += 1
 	})
 	api.sendMessage(message, event.threadID)
