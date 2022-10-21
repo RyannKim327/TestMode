@@ -1,6 +1,6 @@
-const { commands, getPrefix, getName, getFullName } = require("./../config")
+const { commands, getPrefix, getName } = require("./../config")
 
-module.exports = (api, event) => {
+module.exports = async (api, event) => {
 	let creds = [
 		"Salvador",
 		"John Jeremy Antiguo",
@@ -26,7 +26,9 @@ module.exports = (api, event) => {
 		"DroidModifs",
 		"And to all developers of the API used for this project."
 	]
-	let message = "Hello I am " + getFullName() + " you may also call me " + getName() + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"
+	let myID = await api.getCurrentUserID()
+	let user = await api.getUserInfo(myID)
+	let message = "Hello I am " + user[myID]['name'] + " you may also call me " + getName() + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"
 	let i = 1
 	message += "List of Commands:\n"
 	commands.forEach(r => {
@@ -59,7 +61,10 @@ module.exports = (api, event) => {
 	i = 1
 	commands.forEach(r => {
 		let data = r.data
-		if(!data.admin && data.game && data.game != undefined){
+		let show = true
+		if(data.show != undefined)
+			show = data.show
+		if(!data.admin && show && data.game && data.game != undefined){
 			message += i + ". " + data.title + "\n~ " + data.description + "\n"
 			let j = 1
 			data.commands.sort()

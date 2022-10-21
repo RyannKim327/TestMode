@@ -8,10 +8,13 @@ module.exports = async (api, event) => {
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)
 			let off = json.off
-			let x = off.join(", ")
-			x = x.replace(id + ", ", "")
-			x = x.replace(", " + id, "")
-			json.off = x.split(", ")
+			if(off.length > 1){
+				let x = off.join(", ")
+				x = x.replace(id + ", ", "").replace(", " + id, "")
+				json.off = x.split(", ")
+			}else{
+				json.off = []
+			}
 			api.sendMessage({
 				body: `Bot actions are now enabled for ${user[id]['name']}`,
 				mentions: [{
@@ -23,10 +26,13 @@ module.exports = async (api, event) => {
 			let id = event.threadID
 			let thread = await api.getThreadInfo(id)
 			let off = json.off
-			let x = off.join(", ")
-			x = x.replace(id + ", ", "")
-			x = x.replace(", " + id, "")
-			json.off = x.split(", ")
+			if(off.length > 1){
+				let x = off.join(", ")
+				x = x.replace(id + ", ", "").replace(", " + id, "")
+				json.off = x.split(", ")
+			}else{
+				json.off = []
+			}
 			if(thread.isGroup){
 				api.sendMessage({
 					body: `Bot actions are now enabled for ${thread.threadName}`

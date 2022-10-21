@@ -28,7 +28,7 @@ module.exports = async (api, event, regex) => {
 		if(data.did_you_mean != undefined){
 			api.sendMessage(`Did you mean: ${data.did_you_mean}.`, event.threadID)
 		}
-		console.log(data)
+		//console.log(data)
 		if(data.knowledge_panel.title != "N/A" && data.knowledge_panel.lyrics == undefined && (data.knowledge_panel.description != "N/A" || data.featured_snippet.description != "N/A")){
 			let a = data.knowledge_panel
 			let objs = Object.keys(a)
@@ -43,7 +43,7 @@ module.exports = async (api, event, regex) => {
 			message += "\n"
 			objs.forEach(r => {
 				let key = r.replace(/_/gi, " ").toUpperCase()
-				if(r != "title" && r != "type" && r != "description" && r != "url"){
+				if(r != "title" && r != "type" && r != "description" && r != "url" && r != "images"){
 					if(Array.isArray(a[r])){
 						message += `${key}:\n`
 						let number = 1
@@ -63,9 +63,38 @@ module.exports = async (api, event, regex) => {
 			if(a.url != undefined || a.url != "N/A"){
 				message += `\nSource: ${a.url}`
 			}
-			api.sendMessage(message, event.threadID, (e) => {
-				if(e) return api.sendMessage(e, event.threadID)
-			})
+			let sendMsg = {
+				body: message
+			}
+			if(a.images != undefined){
+				console.log(a.images)
+				let num = 1
+				if(a.images[0].url != undefined){
+					let name = `image_${num}.jpg`
+					let dir = `${__dirname}/../${name}`
+					let file = fs.createWriteStream(name)
+					http.get(a.images[0].url, r => {
+						r.pipe(file)
+						file.on("finish", () => {
+							api.sendMessage({
+								body: message,
+								attachment: fs.createReadStream(dir).on("end", () => {
+									if(fs.existsSync(dir)){
+										fs.unlink(dir, (e) => {})
+									}
+								})
+							}, event.threadID, (e) => {
+								if(e) return api.sendMessage(e, event.threadID)
+							})
+						})
+					})
+				}
+			}
+			if(a.images == undefined){
+				api.sendMessage(sendMsg, event.threadID, (e) => {
+					if(e) return api.sendMessage(e, event.threadID)
+				})
+			}
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.knowledge_panel.lyrics != undefined){
 			let a = data.knowledge_panel
@@ -143,6 +172,7 @@ module.exports = async (api, event, regex) => {
 		}else if(data.weather != undefined){
 			let a = data.weather
 			api.sendMessage(`Location: ${a.location}\nForecast: ${a.forecast}\nPrecipitation: ${a.precipitation}\nHumidity: ${a.humidity}\nTemperature: ${a.temperature}\nWind speed: ${a.wind}`, event.threadID)
+			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else{
 			if(data.results.length > 0){
 				let a = data.results
@@ -164,8 +194,8 @@ module.exports = async (api, event, regex) => {
 					}
 				}
 				api.sendMessage(message, event.threadID, (e) => {
-				if(e) return api.sendMessage(e, event.threadID)
-			})
+					if(e) return api.sendMessage(e, event.threadID)
+				})
 			}else{
 				api.sendMessage("There's no results found, might have server error. Please try again later.", event.threadID)
 			}

@@ -1,4 +1,5 @@
 const config = require("./config")
+const server = require("./server")
 
 config.add("info", {
 	title: "Bot Information",
@@ -38,6 +39,16 @@ config.add("busy", {
 		"clearbusy"
 	],
 	admin: true
+})
+
+config.add("cron", {
+	title: "Close Cron Commands.",
+	description: "This is to disable automatic responses from a user.",
+	commands: [
+		"off cron"
+	],
+	hasCooldown: false,
+	affect: true
 })
 
 config.add("gender", {
@@ -89,6 +100,16 @@ config.add("music", {
 	hasArgs: true
 })
 
+config.add("name", {
+	title: "New bot name",
+	description: "For modifications only",
+	commands: [
+		"set\\sname\\sas\\s([\\w]+)"
+	],
+	hasArgs: true,
+	admin: true
+})
+
 config.add("off", {
 	title: "Off/On Bot Feature",
 	description: "Setup by an admin to enable/disable the bot commands in a particular group or person.",
@@ -107,13 +128,22 @@ config.add("pin", {
 	title: "Pin a message",
 	description: "Setup a pinned message, or show the pinned message.",
 	commands: [
+		"clearpin",
 		"pin"
 	],
 	type: [
-		"message",
 		"message_reply"
 	],
 	admin: true
+})
+
+config.add("pin", {
+	title: "Show pinned message",
+	description: "Showing the current pinned message",
+	commands: [
+		"pin"
+	],
+	hasCooldown: false
 })
 
 config.add("toggle", {
@@ -158,7 +188,7 @@ config.add("wiki", {
 	title: "Wikipedia Search",
 	description: "A simple search document which gives you a wikipedia based resukts.\nDisclaimer: Wikipedia is not so accurate so that if you were using this for research purposes, please don't continue it.",
 	queries: [
-		"what\\sis\\s([\\w\\W]+)",
+		"please\\ssearch\\s([\\w\\W]+)\\splease",
 		"can\\sI\\shave\\sa\\swiki\\sresult\\sof\\s([\\w\\W]+)"
 	],
 	commands: [
@@ -166,6 +196,25 @@ config.add("wiki", {
 		"wiki\\s([\\w\\W]+)$"
 	],
 	hasArgs: true
+})
+
+config.add("worship", {
+	title: "New Worship song",
+	description: "Add new worship song playlist.",
+	commands: [
+		"add\\sworship\\ssong\\s([\\w\\W]+)"
+	],
+	hasArgs: true,
+	admin: true
+})
+
+config.add("worshiplists", {
+	title: "Worship song lists",
+	description: "Get worship song playlist.",
+	commands: [
+		"worship\\slists"
+	],
+	admin: true
 })
 
 config.add("answer", {
@@ -179,6 +228,7 @@ config.add("answer", {
 	],
 	game: true,
 	hasArgs: true,
+	show: false
 })
 
 config.add("dice", {
@@ -191,6 +241,16 @@ config.add("dice", {
 		"message",
 		"message_reply"
 	],
+	game: true
+})
+
+config.add("dropball", {
+	title: "Drop Ball",
+	description: "Test Mode",
+	commands: [
+		"drop\\s([\\d]+)"
+	],
+	hasArgs: true,
 	game: true
 })
 
@@ -210,9 +270,9 @@ config.add("flames", {
 	hasArgs: true
 })
 
+config.setAdmins("100081698814451")
+
 config.setPrefix("√")
-config.setName("Mikay")
-config.setFullName("Mikaella Aloa")
 config.setOptions({
 	listenEvents: true,
 	selfListen: true,
@@ -222,3 +282,10 @@ config.setOptions({
 config.start({
 	appState: JSON.parse(process.env['state'])
 })
+
+let run = () => {
+	console.log("Run")
+	setTimeout(run, 60000)
+}
+
+server()

@@ -2,10 +2,14 @@ const fca = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
+const cron_feed = require("./cron/feeds")
+const join = require("./auto/join")
 const openai = require("./auto/openai")
 const bw = require("./utils/badwords")
 //const { read } = require("./utils/database")
 const regex = require("./utils/regex")
+
+let invervals = {}
 
 let options = {
 	listenEvents: true,
@@ -15,7 +19,6 @@ let options = {
 let commands = []
 let prefix
 let name
-let fullname
 let admins = []
 
 let add = (script, data) => {
@@ -29,9 +32,6 @@ let add = (script, data) => {
 let setAdmins = (data) => {
 	admins.push(data)
 }
-let setFullName = (data) => {
-	fullname = data
-}
 let setName = (data) => {
 	name = data
 }
@@ -41,14 +41,16 @@ let setOptions = (data) => {
 let setPrefix = (data) => {
 	prefix = data
 }
-let getFullName = () => {
-	return fullname
-}
 let getName = () => {
 	return name
 }
 let getPrefix = () => {
 	return prefix
+}
+
+let interval_ = () => {
+	intervals = {}
+	setTimeout(interval_, 90000)
 }
 
 let cd = (api, event, cooldown, json, time) => {
@@ -72,6 +74,7 @@ let system = (api, event, r, q, _prefix) => {
 	let _cd = 1.5
 	let type = ["message"]
 	let reg = regex(_prefix + q)
+	let notAffect = false
 	if(r.data.admin != undefined)
 		admin = r.data.admin
 	if(r.data.hasCooldown != undefined)
@@ -84,9 +87,11 @@ let system = (api, event, r, q, _prefix) => {
 		type = r.data.type
 	if(r.data.cd != undefined)
 		_cd = r.data.cd
+	if(r.data.affect != undefined)
+		notAffect = r.data.affect
 	
 	if(json.cooldown[event.senderID] == undefined){
-		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && bw(event.body)) || admins.includes(event.senderID))){
+		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && bw(event.body)) || notAffect || admins.includes(event.senderID))){
 			let script
 			if(admin){
 				script = require("./admin/" + r.script)
@@ -136,11 +141,19 @@ let start = (state) => {
 		if(options.selfListen)
 			admins.push(self)
 		admins.forEach(id => {
-			api.sendMessage("Bot service is now activated.", id)
+			api.sendMessage(`Bot service is now activated.`, id)
 		})
 		
-		cron(api)
-		cron_api(api)
+		await cron(api)
+		await cron_api(api)
+		//await cron_feed(api, admins)
+		
+		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+		json.cooldown = {}
+		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+		name = json.name
+
+		interval_()
 		
 		api.setOptions(options)
 		api.listen(async (error, event) => {
@@ -151,14 +164,21 @@ let start = (state) => {
 					await api.markAsReadAll()
 				}
 			}
+
+			//join(api, event)
 			
 			if(event.body != null){
 				let body = event.body
 				let body_lowercase = body.toLowerCase()
 				let name_lowercase = name.toLowerCase()
 				let loop = true
+
+				if(intervals[event.senderID] == undefined)
+					intervals[event.senderID] = 5
+
+				if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID))
+					api.sendMessage(getPrefix() + "off", event.threadID, event.messageID)
 				
-				let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 				if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
 					let thread = await api.getThreadInfo(event.threadID)
 					if(thread.isGroup == false){
@@ -174,9 +194,12 @@ let start = (state) => {
 					}
 				}
 				
-				if(body_lowercase == name_lowercase){
+				if(body_lowercase == name_lowercase && !json.off.includes(event.senderID)){
+					intervals[event.senderID] -= 1
 					api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
+					//api.sendMessage(JSON.stringify(intervals), self)
 				}else if(body_lowercase.startsWith(name_lowercase)){
+					intervals[event.senderID] -= 1
 					commands.forEach(r => {
 						if(r.data.queries != undefined){
 							r.data.queries.forEach(q => {
@@ -193,6 +216,7 @@ let start = (state) => {
 						cd(api, event, cooldown, json, 5)
 					}
 				}else if(body.startsWith(prefix)){
+					intervals[event.senderID] -= 1
 					commands.forEach(r => {
 						if(r.data.commands != undefined){
 							r.data.commands.forEach(q => {
@@ -207,18 +231,16 @@ let start = (state) => {
 		})
 	})
 }
-
+												  
 module.exports = {
 	add,
 	setAdmins,
-	setFullName,
 	setName,
 	setOptions,
 	setPrefix,
 	start,
 	
 	commands,
-	getFullName,
 	getName,
 	getPrefix
 }

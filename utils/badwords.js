@@ -2,7 +2,6 @@ const fs = require("fs")
 
 module.exports = (text) => {
 	let data = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	console.log(data)
 	let _ = text.toLowerCase()
 	let _data = _.split(/\s/)
 	let output = true

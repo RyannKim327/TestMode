@@ -18,9 +18,9 @@ let config = async (str) => {
 }
 
 module.exports = async (api, event) => {
-	let body = event.body.split(" ")
-	body.shift()
-	console.log("OpenAI")
-	let ai = await config(body.join(" "))
-	api.sendMessage(ai.choices[0].text, event.threadID)
+	let body = event.body
+	if(body.split(" ").length > 1){
+		let ai = await config(body)
+		api.sendMessage("- " + ai.choices[0].text, event.threadID)
+	}
 }
