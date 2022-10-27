@@ -28,7 +28,7 @@ module.exports = async (api, event, regex) => {
 		if(data.did_you_mean != undefined){
 			api.sendMessage(`Did you mean: ${data.did_you_mean}.`, event.threadID)
 		}
-		//console.log(data)
+		console.log(data)
 		if(data.knowledge_panel.title != "N/A" && data.knowledge_panel.lyrics == undefined && (data.knowledge_panel.description != "N/A" || data.featured_snippet.description != "N/A")){
 			let a = data.knowledge_panel
 			let objs = Object.keys(a)
@@ -175,7 +175,7 @@ module.exports = async (api, event, regex) => {
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else{
 			if(data.results.length > 0){
-				let a = data.results
+				let a = data.results.OrganicResult
 				let b = []
 				let message = ""
 				for(let c = 0; c < 3 && c < a.length; c++){

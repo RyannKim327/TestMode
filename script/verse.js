@@ -30,12 +30,32 @@ module.exports = async (api, event, regex) => {
 		let user = await api.getUserInfo(event.senderID)
 		let gender = g(user[event.senderID]['firstName'])['eng']
 		let message = `Here's your verse ${gender} ${user[event.senderID]['name']}\n\n`
+		let res = message
+		let lastBook = ""
+		let lastChapter = ""
+		v.forEach(r => {
+			let book = r.bookname
+			let chapter = r.chapter
+			let verse = r.verse
+			let text = r.text.replace(/<([\w]+)>|<\/([\w]+)>/gi, "")
+			if(lastBook != book){
+				res += "\n" + book
+			}
+			if(lastChapter != chapter && lastBook == book){
+				res += "\n\n" + book + " " + chapter + "\n"
+			}else if(lastChapter != chapter || lastBook != book){
+				res += " " + chapter + "\n"
+			}
+			res += "[" + verse + "] " + text
+			lastBook = book
+				lastChapter = chapter
+		})
 		v.forEach(r => {
 			let text = r.text.replace(/<([\w]+)>|<\/([\w]+)>/gi, "")
 			message += `${r.bookname} ${r.chapter}:${r.verse}\n${text}\n\n`
 		})
 		api.sendMessage({
-			body: message,
+			body: res,
 			mentions: [{
 				id: event.senderID,
 				tag: user[event.senderID]['name']

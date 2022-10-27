@@ -41,6 +41,9 @@ let setOptions = (data) => {
 let setPrefix = (data) => {
 	prefix = data
 }
+let getAdmins = () => {
+	return admins
+}
 let getName = () => {
 	return name
 }
@@ -241,6 +244,7 @@ module.exports = {
 	start,
 	
 	commands,
+	getAdmins,
 	getName,
 	getPrefix
 }

@@ -18,6 +18,15 @@ config.add("info", {
 	hasCooldown: false
 })
 
+config.add("admin", {
+	title: "Admin commands",
+	description: "Lists of all admin commandments.",
+	commands: [
+		"admin"
+	],
+	admin: true
+})
+
 config.add("baybayin", {
 	title: "Baybayin Transliterator",
 	description: "A command which can transform a normal text into baybayin characters.",
@@ -49,6 +58,15 @@ config.add("cron", {
 	],
 	hasCooldown: false,
 	affect: true
+})
+
+config.add("feeds", {
+	title: "Application feedback",
+	description: "For feedbacks and error comming from the app.",
+	commands: [
+		"feedback"
+	],
+	admin: true
 })
 
 config.add("gender", {

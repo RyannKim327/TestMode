@@ -54,6 +54,27 @@ module.exports = async (api) => {
 		//japan(api, 0)
 		let time = await today()
 		let eve = time.data.Events
+		let res = ""
+		let lastBook = ""
+		let lastChapter = ""
+		for(let r of v_data){
+			let book = r.bookname
+			let chapter = r.chapter
+			let verse = r.verse
+			let text = r.text.replace(/<([\w]+)>|<\/([\w]+)>/gi, "")
+			if(lastBook != book){
+				res += "\n" + book
+			}
+			if(lastChapter != chapter && lastBook == book){
+				res += "\n\n" + book + " " + chapter + "\n"
+			}else if(lastChapter != chapter || lastBook != book){
+				res += " " + chapter + "\n"
+			}
+			res += "[" + verse + "] " + text
+			lastBook = book
+			lastChapter = chapter
+			//`${r.bookname} ${r.chapter}:${r.verse}\n${text}\n\n`
+		}
 		api.getThreadList(20, null, ['INBOX'], async (e, data) => {
 			if(e) return console.error(`Error [Cron ThreadList]: ${e}`)
 			let i = 0
@@ -62,10 +83,7 @@ module.exports = async (api) => {
 					let ents = eve[Math.floor(Math.random() * eve.length)]
 					let txt = ents.text.replace(/\d\s&#8211;/gi, "").replace(/&#91;\d&#93;/gi, "")
 					let message = "Bible verse of the day:\n"
-					for(let r of v_data){
-						let text = r.text.replace(/<([\w]+)>|<\/([\w]+)>/gi, "")
-						message += `${r.bookname} ${r.chapter}:${r.verse}\n${text}\n\n`
-					}
+					message += res + "\n\n"
 					message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}\n\nRandom event trivia for today\n~ ${txt}`
 					api.sendMessage(message, r.threadID)
 					i += 1
@@ -81,7 +99,7 @@ module.exports = async (api) => {
 			if(e) return (`Error [Worship]: ${e}`)
 			let i = 0
 			data.forEach(r => {
-				if(self != r.threadID && i < 5 && !json.saga.includes(r.threadID)) {
+				if(self != r.threadID && !json.offcron.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
 					music(api, r.threadID)
 				}
 			})
