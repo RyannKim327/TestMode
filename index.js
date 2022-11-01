@@ -173,6 +173,16 @@ config.add("toggle", {
 	admin: true
 })
 
+config.add("updates", {
+	title: "Application Updates",
+	description: "An updater of app",
+	commands: [
+		"app_update\\s([\\W\\w]+)$"
+	],
+	admin: true,
+	hasArgs: true
+})
+
 config.add("verse", {
 	title: "Bible verse",
 	description: "May share an specific bible verse requested by a user, or send a random verse given by the server.",
