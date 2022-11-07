@@ -23,5 +23,5 @@ module.exports = async (api, event) => {
 	}else{
 		api.sendMessage("I can't find any image here.", event.messageReply.threadID)
 	}
-	api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
+	api.setMessageReaction("", event.messageID, (e) => {}, true)
 }
