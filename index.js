@@ -103,6 +103,18 @@ config.add("guitar", {
 	hasArgs: true
 })
 
+config.add("imgtxt", {
+	title: "Text recognizer from image",
+	description: "This will extract the text scanned. The result is based on the image quality",
+	commands: [
+		"img2txt"
+	],
+	type: [
+		"message_reply"
+	],
+	cd: 1
+})
+
 config.add("music", {
 	title: "YouTube Music Command",
 	description: "A music command which gives you a youtube music based results",

@@ -1,4 +1,4 @@
-const { Innertube } = require("youtubei.js")
+const yt = require("youtubei.js")
 const fs = require("fs")
 
 const gender = require("./../utils/gender")
@@ -9,7 +9,7 @@ module.exports = async (api, event, regex) => {
 		api.sendMessage("Lemme finish the earlier request please.", event.threadID)
 	}else{
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
-		const youtube = await new Innertube()
+		const youtube = await new yt()
 		let body = event.body.match(regex)[1]
 		let result = await youtube.search(body)
 		if(result.videos.length > 0){
