@@ -51,7 +51,6 @@ module.exports = async (api) => {
 	cronjob.schedule("30 6 * * *", async () => {
 		let q_data = await quote()
 		let v_data = await verses()
-		//japan(api, 0)
 		let time = await today()
 		let eve = time.data.Events
 		let res = ""

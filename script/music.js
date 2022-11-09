@@ -4,7 +4,7 @@ const fs = require("fs")
 const gender = require("./../utils/gender")
 
 module.exports = async (api, event, regex) => {
-	let name = `${__dirname}/../${event.threadID}.mp3`
+	let name = `${__dirname}/../temp/${event.threadID}.mp3`
 	if(fs.existsSync(name)){
 		api.sendMessage("Lemme finish the earlier request please.", event.threadID)
 	}else{
@@ -20,7 +20,7 @@ module.exports = async (api, event, regex) => {
 				if(info.title == undefined){
 					api.sendMessage("An Error Occured", event.threadID)
 				}
-				let file = fs.createWriteStream(`${event.threadID}.mp3`)
+				let file = fs.createWriteStream(`temp/${event.threadID}.mp3`)
 				let message = ""
 				let f = youtube.download(result.videos[0].id, {
 					format: "mp4",
@@ -42,23 +42,27 @@ module.exports = async (api, event, regex) => {
 					let firstName = user[event.senderID]['firstName']
 					let g = gender(firstName)['eng']
 					message += `Here's your request ${g} ${username}. A song entitled ${info.title}, uploaded by ${info.metadata.channel_name} on a platform called youtube.`
-					api.sendMessage({
-						body: message,
-						attachment: fs.createReadStream(name).on("end", async () => {
-							if(fs.existsSync(name)){
-								fs.unlink(name, (e) => {
-									if(e) return console.error(`Error [Youtube Music]: ${e}`)
-									api.setMessageReaction("", event.messageID, (e) => {}, true)
-								})
-							}
-						}),
-						mentions: [{
-							id: event.senderID,
-							tag: username
-						}]
-					}, event.threadID, (e) => {
-						if(e) return api.sendMessage(e, event.threadID)
-					})
+					try{
+						api.sendMessage({
+							body: message,
+							attachment: fs.createReadStream(name).on("end", async () => {
+								if(fs.existsSync(name)){
+									fs.unlink(name, (e) => {
+										if(e) return console.error(`Error [Youtube Music]: ${e}`)
+										api.setMessageReaction("", event.messageID, (e) => {}, true)
+									})
+								}
+							}),
+							mentions: [{
+								id: event.senderID,
+								tag: username
+							}]
+						}, event.threadID, (e) => {
+							if(e) return api.sendMessage(e, event.threadID)
+						})
+					}catch(e){
+						api.sendMessage(e, event.threadID)
+					}
 				})
 			}
 		}else{

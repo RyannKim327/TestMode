@@ -24,8 +24,8 @@ module.exports = async (api, event, regex) => {
 		if(data.originalimage == undefined){
 			api.sendMessage(message, event.threadID)
 		}else{
-			let file = fs.createWriteStream(body.replace(/\s/gi, "_") + ".jpg")
-			let name = `${__dirname}/../${body.replace(/\s/gi, "_")}.jpg`
+			let file = fs.createWriteStream("temp/" + body.replace(/\s/gi, "_") + ".jpg")
+			let name = `${__dirname}/../temp/${body.replace(/\s/gi, "_")}.jpg`
 			http.get(data.originalimage.source, (r) => {
 				r.pipe(file)
 				file.on("finish", () => {

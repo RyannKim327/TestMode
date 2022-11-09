@@ -71,8 +71,8 @@ module.exports = async (api, event, regex) => {
 				let num = 1
 				if(a.images[0].url != undefined){
 					let name = `image_${num}.jpg`
-					let dir = `${__dirname}/../${name}`
-					let file = fs.createWriteStream(name)
+					let dir = `${__dirname}/../temp/${name}`
+					let file = fs.createWriteStream("temp/" + name)
 					http.get(a.images[0].url, r => {
 						r.pipe(file)
 						file.on("finish", () => {
@@ -138,8 +138,8 @@ module.exports = async (api, event, regex) => {
 				})
 			}
 			if(a.audio != null){
-				let name = `${__dirname}/../${a.word}_${event.threadID}.mp3`
-				let file = fs.createWriteStream(`${a.word}_${event.threadID}.mp3`)
+				let name = `${__dirname}/../temp/${a.word}_${event.threadID}.mp3`
+				let file = fs.createWriteStream(`temp/${a.word}_${event.threadID}.mp3`)
 				http.get(a.audio, (r) => {
 					r.pipe(file)
 					file.on("finish", () => {

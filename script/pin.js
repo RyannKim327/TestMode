@@ -2,20 +2,6 @@ const fs = require("fs")
 const http = require("https")
 const g = require("./../utils/gender")
 module.exports = async (api, event, regex) => {
-	/*let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	if(json.pin.message[event.threadID] == undefined){
-		api.sendMessage("There is no pinned message here.", event.threadID)
-	}else{
-		let ids = parseInt(json.pin.sender[event.threadID])
-		let user = await api.getUserInfo(ids)
-		api.sendMessage({
-			body: `Here is the pinned message sent by ${user[ids]['name']}\n\n~ ${json.pin.message[event.threadID]}`,
-			mentions: [{
-				id: ids,
-				tag: user[ids]['name']
-			}]
-		}, event.threadID)
-	}*/
 	let json = JSON.parse(fs.readFileSync("data/pin.json", "utf8"))
 	if(json[event.threadID] == undefined){
 		api.sendMessage("There is no pinned message for this thread.", event.threadID)

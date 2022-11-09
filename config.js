@@ -157,7 +157,13 @@ let start = (state) => {
 		name = json.name
 
 		interval_()
-		
+
+		fs.rm("./temp", { recursive: true }, (e) => {
+			console.log("Deleted")
+			setTimeout(() => {
+				fs.mkdirSync("./temp")
+			}, 500)
+		})
 		api.setOptions(options)
 		api.listen(async (error, event) => {
 			if(error) return console.error(`Error [Listen Emitter]: ${error}`)

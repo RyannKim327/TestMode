@@ -4,7 +4,7 @@ const fs = require("fs")
 const gender = require("./../utils/gender")
 
 module.exports = async (api, event, regex) => {
-	let name = `${__dirname}/../${event.threadID}.mp4`
+	let name = `${__dirname}/../temp/${event.threadID}.mp4`
 	if(fs.existsSync(name)){
 		api.sendMessage("Lemme finish the earlier request please.", event.threadID)
 	}else{
@@ -20,7 +20,7 @@ module.exports = async (api, event, regex) => {
 				if(info.title == undefined){
 					api.sendMessage("An Error Occured", event.threadID)
 				}
-				let file = fs.createWriteStream(`${event.threadID}.mp4`)
+				let file = fs.createWriteStream(`temp/${event.threadID}.mp4`)
 				let message = ""
 				let f = youtube.download(result.videos[0].id, {
 					format: "mp4",

@@ -312,7 +312,7 @@ config.add("flames", {
 
 config.setAdmins("100081698814451")
 
-config.setPrefix("√")
+config.setPrefix("->")
 config.setOptions({
 	listenEvents: true,
 	selfListen: true,

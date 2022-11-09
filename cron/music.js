@@ -4,7 +4,7 @@ const youtubei = require("youtubei.js")
 const g = require("./../utils/gender")
 
 module.exports = async (api, event) => {
-	let name = `${__dirname}/../${event}_worship.mp3`
+	let name = `${__dirname}/../temp/${event}_worship.mp3`
 	let top = await top100()
 	let json = JSON.parse(fs.readFileSync("data/songs.json", "utf8"))
 	if(!fs.existsSync(name)){
@@ -23,7 +23,7 @@ module.exports = async (api, event) => {
 			if(s_id != undefined){
 				const info = await yt.getDetails(s_id)
 				if(info.title != undefined){
-					let file = fs.createWriteStream(`${event}_worship.mp3`)
+					let file = fs.createWriteStream(`temp/${event}_worship.mp3`)
 					let dl = yt.download(s_id, {
 						format: "mp4",
 						quality: "tiny",
