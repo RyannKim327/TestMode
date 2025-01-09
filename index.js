@@ -16,7 +16,7 @@ const gptname = async (api, event) => {
 		const user = event.senderID
 		if(!Object.keys(data.names).includes(user)){
 			const usr = await api.getUserInfo(user)
-			data.names[user] = usr[user]['name']
+			data.names[user] = usr[user]['name'].replace(/\W/gi, "")
 		}
 		fs.writeFileSync("data/gpt.json", JSON.stringify(data, null, 2), "utf-8")
 	}
@@ -26,18 +26,23 @@ const processes = async (api, event, prefix) => {
 	let current = 0
 	const check = () => {
 		const command = commands[current]
-		command.command = regex(command.command, prefix)
-		if(command.command.test(event.body)){
-			require(`./user/${command.script}`)(api, event, event.body.match(command.command))
-		}else{
-			if(current <= commands.length){
-				if(current < commands.length){
-					current++
+		if(command.command){
+			command.command = regex(command.command, prefix)
+			if(command.command.test(event.body)){
+				if(command.script === "fallback"){
+					require(`./user/${command.script}`)(api, event, event.body.match(command.command))
+				}else{
+					if(current <= commands.length){
+						if(current < commands.length){
+							current++
+						}
+						check()
+					}
 				}
-				check()
-			}else{
-				// TODO: Create a fallback here
 			}
+		}else{
+			// TODO: Create a fallback here
+			require("./user/fallback")(api, event, prefix)
 		}
 	}
 	check()
