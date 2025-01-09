@@ -1,3 +1,3 @@
-module.exports = (str) => {
-	return new RegExp(str, "i")
+module.exports = (str, prefix) => {
+	return new RegExp(`^${prefix ?? ""}${str}`, "i")
 }
