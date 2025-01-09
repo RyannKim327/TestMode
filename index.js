@@ -10,6 +10,18 @@ const setCommand = (command) => {
 	commands.push(command)
 }
 
+const gptname = async (api, event) => {
+	if(event.senderID){
+		const data = JSON.parse(fs.readFileSync("data/gpt.json"))
+		const user = event.senderID
+		if(!Object.keys(data.names).includes(user)){
+			const usr = await api.getUserInfo(user)
+			data.names[user] = usr[user]['name']
+		}
+		fs.writeFileSync("data/gpt.json", JSON.stringify(data, null, 2), "utf-8")
+	}
+}
+
 const processes = async (api, event, prefix) => {
 	let current = 0
 	const check = () => {
@@ -18,8 +30,14 @@ const processes = async (api, event, prefix) => {
 		if(command.command.test(event.body)){
 			require(`./user/${command.script}`)(api, event, event.body.match(command.command))
 		}else{
-			current++
-			check()
+			if(current <= commands.length){
+				if(current < commands.length){
+					current++
+				}
+				check()
+			}else{
+				// TODO: Create a fallback here
+			}
 		}
 	}
 	check()
@@ -46,6 +64,8 @@ require("ws3-fca")({
 			logs.log("Listener", "Listening")
 			
 			const botData = read()
+			
+			gptname(api, event)
 
 			if(event.body){
 				// TODO: To create a process for checking the commands
