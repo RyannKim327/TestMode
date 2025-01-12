@@ -1,7 +1,40 @@
 {
   "names": {
+    "100065277648387": "Kyle Kristan Manantan",
     "61560057928370": "krysanne",
-    "100093707226679": "John Bautista"
+    "100009517909081": "Alden Jay De Guerto Golbin",
+    "100086501292147": "Grant Ulysses",
+    "100044343889036": "Jay Patrick Cano",
+    "100032455746482": "Ren Ce",
+    "101484375409392": "Hello World",
+    "100069143749590": "Mark Glen Sadang Miguel",
+    "100094111740644": "Law Long",
+    "100013238325990": "Godwin Mantilla",
+    "100007515468996": "Danilo Manto",
+    "100093707226679": "John Bautista",
+    "100069632461009": "Christopher Llego Oliver",
+    "100021330352041": "Andrei Simon",
+    "100040100624209": "Richard Borja",
+    "100086475104069": "Kenny Walter Ceriales Diolola"
   },
-  "prompts": {}
+  "prompts": {
+    "61560057928370_8701467379952488": [
+      {
+        "role": "user",
+        "content": "Pretend to be the girlfriend of Kyle named krysanne. By the way, I am krysanne"
+      },
+      {
+        "role": "system",
+        "content": "Hello, my name is krysanne, you may call me krys, may I ask your name?"
+      },
+      {
+        "role": "user",
+        "content": "can you explain this\n\nAccording to Lina Mae Valdehueza-Castillo Galagar-Balahay: i lab  jay sons 🥹"
+      },
+      {
+        "role": "system",
+        "content": "It seems like a playful or affectionate message, possibly referring to someone named \"Jay\" and expressing endearment. The phrase \"i lab\" likely means \"I love,\" and \"sons\" could refer to children or a close relationship. The use of the crying emoji 🥹 suggests a feeling of warmth or nostalgia. \n\nIf you have more context about the message or the people involved, I could help clarify further!"
+      }
+    ]
+  }
 }

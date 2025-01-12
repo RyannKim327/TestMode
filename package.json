@@ -8,6 +8,7 @@
     "google-tts-api": "^2.0.2",
     "https": "^1.0.0",
     "node-cron": "^3.0.0",
+    "nodemon": "^3.1.9",
     "npmlog": "^7.0.1",
     "pls-img-txt": "^0.0.1",
     "request": "^2.88.2",
@@ -18,10 +19,9 @@
   "description": "Never sell my project",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon index --ignore .nodemonignore"
   },
   "keywords": [],
   "author": "RyannKim327",
