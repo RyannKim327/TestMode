@@ -1,5 +1,9 @@
 [
   {
+    "script": "music",
+    "command": "music ([\\w\\W]+)"
+  },
+  {
     "script": "test",
     "command": "test"
   }

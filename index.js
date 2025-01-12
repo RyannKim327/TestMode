@@ -61,6 +61,14 @@ require("ws3-fca")({
 			commands = commands_
 		}
 
+		if(fs.existsSync(`${__dirname}/temp`)){
+			fs.rm(`${__dirname}/temp`, { recursive: true }, (e) => {
+				fs.mkdirSync(`${__dirname}/temp`)
+			})
+		}else{
+			fs.mkdirSync(`${__dirname}/temp`)
+		}
+
 		api.setOptions({
 			listenEvents: true,
 			selfListen: true

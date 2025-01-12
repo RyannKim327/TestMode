@@ -1,4 +1,5 @@
 .autogit
 node_modules
+temp
 appstate.json
 fb-dtsg_data.json
