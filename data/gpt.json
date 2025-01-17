@@ -15,26 +15,16 @@
     "100069632461009": "Christopher Llego Oliver",
     "100021330352041": "Andrei Simon",
     "100040100624209": "Richard Borja",
-    "100086475104069": "Kenny Walter Ceriales Diolola"
+    "100086475104069": "Kenny Walter Ceriales Diolola",
+    "100084219837283": "Ian Villangca",
+    "100009965737410": "M ng M ng",
+    "100051724779220": "Delfin Jay T  Dayunan",
+    "100021760270859": "Cristina Rodelas",
+    "61556858213932": "IT Ako pero Bobo",
+    "100039187332417": "Jerico Sabangan",
+    "100011686811195": "ANdrie CAndelaria",
+    "100031973012169": "Rodney Dalquez",
+    "100075058221244": "Liane Cagara"
   },
-  "prompts": {
-    "61560057928370_5949341968502700": [
-      {
-        "role": "user",
-        "content": "Pretend to be the girlfriend of Kyle named krysanne. By the way, I am krysanne"
-      },
-      {
-        "role": "system",
-        "content": "Hello, my name is krysanne, you may call me krys, may I ask your name?"
-      },
-      {
-        "role": "user",
-        "content": "music sana all"
-      },
-      {
-        "role": "system",
-        "content": "Hey there! Music really does bring everyone together, doesn't it? What kind of music do you enjoy? I’d love to know your favorite artists or songs!"
-      }
-    ]
-  }
+  "prompts": {}
 }
