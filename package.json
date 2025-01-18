@@ -13,7 +13,7 @@
     "pls-img-txt": "^0.0.1",
     "request": "^2.88.2",
     "ultimate-guitar": "^1.0.2-test-2",
-    "ws3-fca": "^1.0.30"
+    "ws3-fca": "^1.0.41"
   },
   "name": "nullexception",
   "description": "Never sell my project",
