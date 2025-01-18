@@ -1,7 +1,13 @@
 [
   {
     "script": "music",
-    "command": "music ([\\w\\W]+)"
+    "command": "music __all__",
+    "hint": "music [param: string]"
+  },
+  {
+    "script": "who",
+    "command": "shareshit",
+    "type": ["message_reply"]
   },
   {
     "script": "test",

@@ -1,5 +1,6 @@
 .autogit
+appstate.json
 node_modules
 temp
 appstate.json
-fb-dtsg_data.json
+fb_dtsg_data.json

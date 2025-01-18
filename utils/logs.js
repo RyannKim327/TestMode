@@ -1,15 +1,15 @@
 module.exports.log = (from, message) => {
   if(typeof message === "string"){
-    console.log(`LOG [${from}]: ${message}`)
+    console.log(`\x1b[32mLOG [${from}]:\x1b[37m ${message}`)
   }else{
-    console.log(`LOG [${from}]: ${JSON.stringify(message, null, 2)}`)
+    console.log(`\x1b[32mLOG [${from}]:\x1b[37m ${JSON.stringify(message, null, 2)}`)
   }
 }
 
-module.exports.err = (from, message) => {
+module.exports.error = (from, message) => {
   if(typeof message === "string"){
-    console.error(`LOG [${from}]: ${message}`)
+    console.error(`\x1b[31mERROR [${from}]:\x1b[37m ${message}`)
   }else{
-    console.error(`LOG [${from}]: ${JSON.stringify(message, null, 2)}`)
+    console.error(`\x1b[31mERROR [${from}]:\x1b[37m ${JSON.stringify(message, null, 2)}`)
   }
 }

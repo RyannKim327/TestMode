@@ -4,7 +4,6 @@ const fs = require("fs")
 const logs = require("./../utils/logs")
 
 module.exports = async (api, event, prefix) => {
-  console.log("Fallback")
   const json = JSON.parse(fs.readFileSync("data/gpt.json", "utf-8"))
   const user = event.senderID
   let message = event.body.substring(prefix.length);
