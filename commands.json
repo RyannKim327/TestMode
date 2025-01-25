@@ -1,5 +1,10 @@
 [
   {
+    "script": "guitar",
+    "command": "guitar __all__",
+    "hint": "guitar [param: string]"
+  },
+  {
     "script": "music",
     "command": "music __all__",
     "hint": "music [param: string]"

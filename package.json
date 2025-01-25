@@ -12,7 +12,7 @@
     "npmlog": "^7.0.1",
     "pls-img-txt": "^0.0.1",
     "request": "^2.88.2",
-    "ultimate-guitar": "^1.0.2-test-2",
+    "ultimate-guitar": "^2.0.3",
     "ws3-fca": "^1.0.41"
   },
   "name": "nullexception",
