@@ -23,8 +23,7 @@ module.exports = async (api, event, prefix) => {
     },
     {
       role: "system",
-      content:
-        "Hello, my name is krysanne, you may call me krys, may I ask your name?",
+      content: `Hello, my name is krysanne, you may call me krys, may I ask your name?`,
     },
   ];
 
