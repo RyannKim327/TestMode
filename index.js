@@ -7,7 +7,7 @@ const { prefixStyle } = require("npmlog");
 
 let commands = [];
 
-const setCommand = (command) => {
+const setCommand = command => {
   commands.push(command);
 };
 
@@ -31,7 +31,11 @@ const help = async (api, event, prefix) => {
   let message = `Hello user my name is ${user[id]["name"]}, a half human, half facebook bot. I was build with some commands that I hope it helps:\n\n`;
   for (let c in commands) {
     const command = commands[c];
-    message += `${parseInt(c) + 1}: ${command.title ?? `${command.script[0].toUpperCase() + command.script.substring(1)} Command`}\n ~ ${command.description ?? "No description provided"}\nCommand Format: ${prefix}${command.hint ?? command.command}\n\n`;
+    message += `${parseInt(c) + 1}: ${command.title ??
+      `${command.script[0].toUpperCase() +
+        command.script.substring(1)} Command`}\n ~ ${command.description ??
+      "No description provided"}\nCommand Format: ${prefix}${command.hint ??
+      command.command}\n\n`;
   }
   api.shareContact(message, id, event.threadID);
 };
@@ -49,7 +53,7 @@ const processes = async (api, event, prefix) => {
             require(`./user/${command.script}`)(
               api,
               event,
-              event.body.match(command.command),
+              event.body.match(command.command)
             );
           } else {
             current++;
@@ -66,7 +70,7 @@ const processes = async (api, event, prefix) => {
 
 require("./fca")(
   {
-    appState: JSON.parse(fs.readFileSync("appstate.json", "utf-8")),
+    appState: JSON.parse(fs.readFileSync("appstate.json", "utf-8"))
   },
   async (error, api) => {
     if (error) return logs.error("Login", error);
@@ -78,7 +82,7 @@ require("./fca")(
     }
 
     if (fs.existsSync(`${__dirname}/temp`)) {
-      fs.rm(`${__dirname}/temp`, { recursive: true }, (e) => {
+      fs.rm(`${__dirname}/temp`, { recursive: true }, e => {
         fs.mkdirSync(`${__dirname}/temp`);
       });
     } else {
@@ -87,7 +91,7 @@ require("./fca")(
 
     api.setOptions({
       listenEvents: true,
-      selfListen: true,
+      selfListen: true
     });
 
     api.listen(async (error, event) => {
@@ -114,5 +118,5 @@ require("./fca")(
         }
       }
     });
-  },
+  }
 );
