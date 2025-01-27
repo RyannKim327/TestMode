@@ -12,6 +12,7 @@ let region;
 const errorRetrieving =
   "Error retrieving userID. This can be caused by a lot of things, including getting blocked by Facebook for logging in from an unknown location. Try logging in with a browser to verify.";
 
+// NOTE: Give credits sa mga mamaw
 // INFO: NO NEED FCA
 async function setOptions(globalOptions_from, options = {}) {
   Object.keys(options).map(key => {
@@ -284,10 +285,10 @@ function buildAPI(html, jar) {
   //hajime pogi
   //@Kenneth Panio: i fixed the cookie do not change or remove this line what it does? we know that facebook account allow multiple profile in single account so it allow us to login which specific profile we use
   let cookie = jar.getCookies("https://www.facebook.com");
-  let primary_profile = cookie.filter(function (val) {
+  let primary_profile = cookie.filter(function(val) {
     return val.cookieString().split("=")[0] === "c_user";
   });
-  let secondary_profile = cookie.filter(function (val) {
+  let secondary_profile = cookie.filter(function(val) {
     return val.cookieString().split("=")[0] === "i_user";
   });
   if (primary_profile.length === 0 && secondary_profile.length === 0) {
@@ -551,17 +552,17 @@ async function loginHelper(
     });
   if (globalOptions.pageID) {
     mainPromise = mainPromise
-      .then(function () {
+      .then(function() {
         return utils.get(
           "https://www.facebook.com/" +
-          ctx.globalOptions.pageID +
-          "/messages/?section=messages&subsection=inbox",
+            ctx.globalOptions.pageID +
+            "/messages/?section=messages&subsection=inbox",
           ctx.jar,
           null,
           globalOptions
         );
       })
-      .then(function (resData) {
+      .then(function(resData) {
         let url = utils
           .getFrom(
             resData.body,
