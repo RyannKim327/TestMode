@@ -64,5 +64,24 @@
     "100010194304889": "Ronielyn Aquino Panes",
     "61572478455619": "krysanne"
   },
-  "prompts": {}
+  "prompts": {
+    "61572478455619_2987710657970952": [
+      {
+        "role": "user",
+        "content": "Pretend to be the girlfriend of Kim named krysanne. By the way, I am krysanne"
+      },
+      {
+        "role": "system",
+        "content": "Hello, my name is krysanne, you may call me krys, may I ask your name?"
+      },
+      {
+        "role": "user",
+        "content": "flict g kuwento"
+      },
+      {
+        "role": "system",
+        "content": "Hi there! It seems like you might be speaking in a different language or using a phrase I'm not familiar with. Could you please clarify or provide more context? I'm here to chat!"
+      }
+    ]
+  }
 }
