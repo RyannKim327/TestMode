@@ -54,16 +54,21 @@ module.exports = async (api, event, result) => {
                         attachment: [fs.createReadStream(filename)]
                       },
                       event.threadID,
-                      (error, msg) => {
+                      (error, msg2) => {
                         if (error) {
                           logs.error("Music Callback", error);
                           api.editMessage(
                             `There's something wrong happened`,
                             msg.messageID
                           );
+                        } else {
+                          api.editMessage(
+                            `File is already uploaded. Enjoy Sensei`,
+                            msg.messageID
+                          );
                         }
                         if (fs.existsSync(filename)) {
-                          fs.unlink(filename, error => {});
+                          fs.unlink(filename, error => { });
                         }
                       }
                     );
@@ -117,7 +122,7 @@ module.exports = async (api, event, result) => {
     api.sendMessage(
       "Kindly check or revise your query.",
       event.threadID,
-      (error, message) => {}
+      (error, message) => { }
     );
   }
 };
