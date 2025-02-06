@@ -26,14 +26,14 @@ const gptname = async (api, event) => {
 };
 
 const help = async (api, event, prefix) => {
-  const id = 61560057928370;
+  const id = 61572478455619;
   const user = await api.getUserInfo(id);
   let message = `Hello user my name is ${user[id]["name"]}, a half human, half facebook bot. I was build with some commands that I hope it helps:\n\n`;
   for (let c in commands) {
     const command = commands[c];
     message += `${parseInt(c) + 1}: ${command.title ??
       `${command.script[0].toUpperCase() +
-        command.script.substring(1)} Command`}\n ~ ${command.description ??
+      command.script.substring(1)} Command`}\n ~ ${command.description ??
       "No description provided"}\nCommand Format: ${prefix}${command.hint ??
       command.command}\n\n`;
   }
