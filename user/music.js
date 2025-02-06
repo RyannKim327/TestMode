@@ -7,6 +7,9 @@ const logs = require("./../utils/logs");
 module.exports = async (api, event, result) => {
   let q = "?q=";
   api.sendMessage(`Searching for matches`, event.threadID, async (err, msg) => {
+    if (err) {
+      return logs.error("Music", err);
+    }
     const data = await axios
       .get(
         `https://kaiz-apis.gleeze.com/api/ytsearch${q}${encodeURIComponent(
@@ -57,7 +60,7 @@ module.exports = async (api, event, result) => {
                       attachment: [fs.createReadStream(filename)]
                     },
                     event.threadID,
-                    (error, msg2) => {
+                    (error, msg_) => {
                       if (error) {
                         logs.error("Music Callback", error);
                         api.editMessage(
@@ -112,7 +115,6 @@ module.exports = async (api, event, result) => {
                 msg.messageID
               );
             }
-            return null;
           });
       };
       fetching();
