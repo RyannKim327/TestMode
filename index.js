@@ -3,7 +3,6 @@ const fs = require("fs");
 const logs = require("./utils/logs");
 const { read, save } = require("./utils/preferences");
 const regex = require("./utils/regex");
-const { prefixStyle } = require("npmlog");
 
 let commands = [];
 
@@ -28,7 +27,9 @@ const gptname = async (api, event) => {
 const help = async (api, event, prefix) => {
   const id = 61572478455619;
   const user = await api.getUserInfo(id);
-  let message = `Hello user my name is ${user[id]["name"]}, a half human, half facebook bot. I was build with some commands that I hope it helps:\n\n`;
+  const self = await api.getUserInfo(event.senderID);
+  let message = `Hello ${self[event.senderID]["name"]} my name is ${user[id]["name"]
+    }, a half human, half facebook bot. I was build with some commands that I hope it helps:\n\n`;
   for (let c in commands) {
     const command = commands[c];
     message += `${parseInt(c) + 1}: ${command.title ??
