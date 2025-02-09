@@ -3,6 +3,9 @@ const fs = require("fs");
 const logs = require("./utils/logs");
 const { read, save } = require("./utils/preferences");
 const regex = require("./utils/regex");
+const fg = require("./utils/fetchGist");
+const ug = require("./utils/updateGist");
+const updateGist = require("./utils/updateGist");
 
 let commands = [];
 
@@ -12,7 +15,8 @@ const setCommand = command => {
 
 const gptname = async (api, event) => {
   if (event.senderID) {
-    const data = JSON.parse(fs.readFileSync("data/gpt.json"));
+    const g = await fg();
+    const data = g;
     const user = event.senderID;
     if (!Object.keys(data.names).includes(user)) {
       const usr = await api.getUserInfo(user);
@@ -20,7 +24,8 @@ const gptname = async (api, event) => {
         data.names[user] = usr[user]["name"].replace(/\W/gi, " ").trim();
       }
     }
-    fs.writeFileSync("data/gpt.json", JSON.stringify(data, null, 2), "utf-8");
+    updateGist(data);
+    // fs.writeFileSync("data/gpt.json", JSON.stringify(data, null, 2), "utf-8");
   }
 };
 

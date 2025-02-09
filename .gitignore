@@ -4,3 +4,4 @@ node_modules
 temp
 appstate.json
 fb_dtsg_data.json
+.env

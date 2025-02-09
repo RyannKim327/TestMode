@@ -1,10 +1,12 @@
 const axios = require("axios");
 const fs = require("fs");
+const fg = require("./../utils/fetchGist");
+const ug = require("./../utils/updateGist");
 
 const logs = require("./../utils/logs");
 
 module.exports = async (api, event, prefix) => {
-  const json = JSON.parse(fs.readFileSync("data/gpt.json", "utf-8"));
+  const json = await fg(); // JSON.parse(fs.readFileSync("data/gpt.json", "utf-8"));
   const user = event.senderID;
   let message = event.body.substring(prefix.length);
   const key = `${user}_${event.threadID}`;
@@ -67,11 +69,12 @@ module.exports = async (api, event, prefix) => {
           role: "system",
           content: data.response // choices[0].message.content
         });
-        fs.writeFileSync(
-          "data/gpt.json",
-          JSON.stringify(json, null, 2),
-          "utf-8"
-        );
+        // fs.writeFileSync(
+        //   "data/gpt.json",
+        //   JSON.stringify(json, null, 2),
+        //   "utf-8"
+        // );
+        ug(JSON.stringify(json, null, 2));
       }
     );
   } catch (error) {
