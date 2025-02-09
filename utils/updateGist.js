@@ -13,7 +13,7 @@ module.exports = async data2 => {
 
     // Fetch the existing Gist
     const { data } = await axios.get(url, {
-      headers: { Authorization: `token ${GITHUB_TOKEN}` }
+      headers: { Authorization: `token ${GH_TOKEN}` }
     });
 
     // Modify the file content
@@ -30,7 +30,7 @@ module.exports = async data2 => {
         }
       },
       {
-        headers: { Authorization: `token ${GITHUB_TOKEN}` }
+        headers: { Authorization: `token ${GH_TOKEN}` }
       }
     );
 

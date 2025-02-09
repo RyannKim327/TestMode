@@ -6,7 +6,7 @@ module.exports = async () => {
     `https://api.github.com/gists/${process.env.GIST_ID}`,
     {
       headers: {
-        Authorization: `token ${process.env.GITHUB_TOKEN}`,
+        Authorization: `token ${process.env.GH_TOKEN}`,
         Accept: "application/vnd.github.v3+json",
       },
     },
