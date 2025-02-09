@@ -1,5 +1,11 @@
 [
   {
+    "script": "bible",
+    "description": "A bible verse from biblegateway",
+    "command": "verse __all__",
+    "hint": "verse [passage: string]"
+  },
+  {
     "script": "clear",
     "description": "To clear all the GPT conversation history",
     "command": "cls"
