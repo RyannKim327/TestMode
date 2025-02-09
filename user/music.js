@@ -69,12 +69,12 @@ module.exports = async (api, event, result) => {
                         );
                       } else {
                         api.editMessage(
-                          `File is already uploaded. Enjoy Sensei`,
+                          `The music is already uploaded. Enjoy Sensei`,
                           msg.messageID
                         );
                       }
                       if (fs.existsSync(filename)) {
-                        fs.unlink(filename, error => { });
+                        fs.unlink(filename, error => {});
                       }
                     }
                   );

@@ -1,11 +1,17 @@
 [
   {
+    "script": "clear",
+    "description": "To clear all the GPT conversation history",
+    "command": "cls"
+  },{
     "script": "guitar",
+    "description": "A command to search guitar tabs and chords.",
     "command": "guitar __all__",
     "hint": "guitar [param: string]"
   },
   {
     "script": "music",
+    "description": "A music command source from youtube.",
     "command": "music __all__",
     "hint": "music [param: string]"
   },

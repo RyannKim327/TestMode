@@ -42,4 +42,5 @@ module.exports = async data2 => {
       error.response?.data || error.message
     );
   }
+  return "";
 };
