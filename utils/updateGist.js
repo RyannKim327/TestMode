@@ -3,7 +3,7 @@ const axios = require("axios");
 
 const logs = require("./../utils/logs");
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GH_TOKEN = process.env.GITHUB_TOKEN;
 const GIST_ID = process.env.GIST_ID; // Replace with your Gist ID
 const FILE_NAME = process.env.FILE; // Replace with the file name in the Gist
 

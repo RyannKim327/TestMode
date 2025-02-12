@@ -7,6 +7,7 @@ const fg = require("./utils/fetchGist");
 const ug = require("./utils/updateGist");
 const updateGist = require("./utils/updateGist");
 
+// TODO: To create a lists of commands
 let commands = [];
 
 const setCommand = command => {
