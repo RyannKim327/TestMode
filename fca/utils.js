@@ -1466,7 +1466,8 @@ const meta = prop => new RegExp(`<meta property="${prop}" content="([^"]*)"`);
 
 function log(status = "i", from, msg) {
   let color = 36;
-  switch (status.toLowerCase()) {
+  status = status[0].toLowerCase();
+  switch (status) {
     case "w":
       color = 33;
       status = "WARN";

@@ -36,8 +36,9 @@ module.exports = async (api, event, prefix) => {
   if (event.messageReply) {
     const body = event.messageReply.body;
     const user_ = await api.getUserInfo(event.messageReply.senderID);
-    message = `${message}\n\nAccording to ${user_[event.messageReply.senderID]["name"]
-      }: ${body}`;
+    message = `${message}\n\nAccording to ${
+      user_[event.messageReply.senderID]["name"]
+    }: ${body}`;
   }
 
   json.prompts[key].push({
@@ -62,7 +63,7 @@ module.exports = async (api, event, prefix) => {
       }
     );
     api.sendMessage(
-      data.response, // choices[0].message.content,
+      `‎${data.response}`, // choices[0].message.content,
       event.threadID,
       (error, msg) => {
         json.prompts[key].push({

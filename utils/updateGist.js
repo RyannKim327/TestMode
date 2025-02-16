@@ -3,7 +3,7 @@ const axios = require("axios");
 
 const logs = require("./../utils/logs");
 
-const GH_TOKEN = process.env.GITHUB_TOKEN;
+const GH_TOKEN = process.env.GH_TOKEN;
 const GIST_ID = process.env.GIST_ID; // Replace with your Gist ID
 const FILE_NAME = process.env.FILE; // Replace with the file name in the Gist
 
@@ -36,11 +36,7 @@ module.exports = async data2 => {
 
     logs.log("GIST", "Gist updated successfully!");
   } catch (error) {
-    logs.error(
-      "GIST",
-      "Error updating Gist:",
-      error.response?.data || error.message
-    );
+    logs.error("GIST", error.response?.data || error.message);
   }
   return "";
 };

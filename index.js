@@ -48,6 +48,18 @@ const help = async (api, event, prefix) => {
   api.shareContact(message, id, event.threadID);
 };
 
+const mentioned = async (api, event) => {
+  const self = "61572478455619";
+  const usr = await api.getUserInfo(self);
+  if (event.mentions[self] === `@${usr[self]["name"]}`) {
+    api.sendMessage(
+      `Please do wait for a moment, until the owner came back, the automation is still on, you may chat with me with colon ( : ) as prefix.`,
+      event.threadID,
+      (err, msg) => {}
+    );
+  }
+};
+
 const processes = async (api, event, prefix) => {
   let current = 0;
   const check = () => {
@@ -123,6 +135,8 @@ require("./fca")(
           } else {
             processes(api, event, botData.prefix);
           }
+        } else if (event.mentions) {
+          mentioned(api, event);
         }
       }
     });
