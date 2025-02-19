@@ -36,9 +36,8 @@ module.exports = async (api, event, prefix) => {
   if (event.messageReply) {
     const body = event.messageReply.body;
     const user_ = await api.getUserInfo(event.messageReply.senderID);
-    message = `${message}\n\nAccording to ${
-      user_[event.messageReply.senderID]["name"]
-    }: ${body}`;
+    message = `${message}\n\nAccording to ${user_[event.messageReply.senderID]["name"]
+      }: ${body}`;
   }
 
   json.prompts[key].push({
@@ -50,7 +49,7 @@ module.exports = async (api, event, prefix) => {
 
   try {
     const { data } = await axios.post(
-      "https://we-love-gpt.onrender.com/api/chat",
+      "https://api-freegpt.onrender.com/api/chat",
       {
         messages: a
         // stream: false,
