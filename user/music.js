@@ -56,7 +56,7 @@ module.exports = async (api, event, result) => {
                 file.on("finish", () => {
                   api.sendMessage(
                     {
-                      body: `Here's your request:\n  Title: ${data.title}`,
+                      body: "",
                       attachment: [fs.createReadStream(filename)]
                     },
                     event.threadID,
@@ -69,7 +69,8 @@ module.exports = async (api, event, result) => {
                         );
                       } else {
                         api.editMessage(
-                          `The music is already uploaded. Enjoy Sensei`,
+                          `Here's your request:\n  Title: ${data.title}`,
+                          // `The music is already uploaded. Enjoy Sensei`,
                           msg.messageID
                         );
                       }
