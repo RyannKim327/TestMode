@@ -36,7 +36,7 @@ module.exports = async (api, event, result) => {
         logs.log("Music Trials", trials);
         axios
           .get(
-            `https://kaiz-ytmp4-downloader.vercel.app/ytmp4?url=${encodeURIComponent(
+            `https://kaiz-apis.gleeze.com/api/ytmp3-v2?url=${encodeURIComponent(
               data.url
             )}&quality=mp3`
           )

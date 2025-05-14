@@ -37,3 +37,8 @@
 15. Node Package Manager JS
 16. To all api used to this projects
 17. And to all testers and groups
+
+### Special Credits to
+1. Kenlie Navacilla Jugarap
+2. Kenneth F. Aceberos
+
