@@ -19,10 +19,12 @@ const gptname = async (api, event) => {
     const g = await fg();
     const data = g;
     const user = event.senderID;
-    if (!Object.keys(data.names).includes(user)) {
-      const usr = await api.getUserInfo(user);
-      if (usr[user]["name"]) {
-        data.names[user] = usr[user]["name"].replace(/\W/gi, " ").trim();
+    if(data.names){
+      if (!Object.keys(data.names).includes(user)) {
+        const usr = await api.getUserInfo(user);
+        if (usr[user]["name"]) {
+          data.names[user] = usr[user]["name"].replace(/\W/gi, " ").trim();
+        }
       }
     }
     updateGist(data);
@@ -116,6 +118,7 @@ require("./fca")(
 
     api.listen(async (error, event) => {
       if (error) return logs.error("Listener", error);
+
       if (!started) {
         logs.log("Listener", "Listening");
         started = !started;

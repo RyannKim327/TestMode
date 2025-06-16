@@ -4,7 +4,7 @@
     "biblegateway-scrape": "^0.0.8",
     "body-parser": "^1.20.1",
     "cheerio": "^1.0.0-rc.10",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
     "express": "^4.18.1",
     "fs": "^0.0.1-security",
     "google-tts-api": "^2.0.2",

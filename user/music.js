@@ -1,3 +1,4 @@
+require("dotenv").config()
 const axios = require("axios");
 const fs = require("fs");
 const http = require("https");
@@ -12,17 +13,16 @@ module.exports = async (api, event, result) => {
     }
     const data = await axios
       .get(
-        `https://kaiz-apis.gleeze.com/api/ytsearch${q}${encodeURIComponent(
-          result[1]
-        )}`
+         `https://kaiz-apis.gleeze.com/api/yt-metadata?title=${encodeURIComponent(result[1])}&apikey=${process.env.KAIZAPI}`,
       )
       .then(r => {
-        return r.data.items[0];
+        return r.data;
       })
       .catch(err => {
         logs.error("Music Search", err);
         return null;
       });
+    console.log(data)
     api.editMessage(`INFO [${data.title}]: Song found`, msg.messageID);
     logs.log("Music test", data);
     let trials = 1;
@@ -36,9 +36,7 @@ module.exports = async (api, event, result) => {
         logs.log("Music Trials", trials);
         axios
           .get(
-            `https://kaiz-apis.gleeze.com/api/ytmp3-v2?url=${encodeURIComponent(
-              data.url
-            )}&quality=mp3`
+             `https://kaiz-apis.gleeze.com/api/ytmp3-v2?url=${encodeURIComponent("https://youtube.com/watch?v=" + data.videoId)}&apikey=${process.env.KAIZAPI}`,
           )
           .then(res => {
             const newData = res.data;

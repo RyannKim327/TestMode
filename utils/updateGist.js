@@ -1,7 +1,8 @@
-require("dotenv").config();
+require("dotenv").config()
 const axios = require("axios");
 
 const logs = require("./../utils/logs");
+const fetchGist = require("./fetchGist");
 
 const GH_TOKEN = process.env.GH_TOKEN;
 const GIST_ID = process.env.GIST_ID; // Replace with your Gist ID
@@ -12,9 +13,7 @@ module.exports = async data2 => {
     const url = `https://api.github.com/gists/${GIST_ID}`;
 
     // Fetch the existing Gist
-    const { data } = await axios.get(url, {
-      headers: { Authorization: `token ${GH_TOKEN}` }
-    });
+    const data = await fetchGist()
 
     // Modify the file content
     if (typeof data2 !== "string") {
@@ -30,7 +29,11 @@ module.exports = async data2 => {
         }
       },
       {
-        headers: { Authorization: `token ${GH_TOKEN}` }
+        headers: {
+          Authorization: `Bearer ${process.env.GH_TOKEN}`,
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28"
+        }
       }
     );
 
