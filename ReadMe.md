@@ -1,24 +1,36 @@
-# Facebook Bot
-### MPOP Reverse II
+<h3 align="center">Facebook Bot</h3>
+<h4 align="center">MPOP Reverse II</h4>
 
 > A simple facebook bot which trying to help students to their needs.
 
--- Projects --
+---
+### Terms and Conditions
+<fieldset>
+<legend>Projects</legend>
 
-1. Don't sell my projects, even you make some modifications, instead, give them my source for free and sell what's yours.
-2. Avoid giving me any credit. I don't like it.
-3. Respect my works, don't add any kind of pornographic contents, as if I didn't add it too.
-4. Help them to get the logic of my code if they asked you.
-5. Don't just copy and paste, learn its logic too specially the flow of the code.
+<ol>
+<li>Don't sell my projects, even you make some modifications, instead, give them my source for free and sell what's yours.</li>
+<li>Avoid giving me any credit. I don't like it.</li>
+<li>Respect my works, don't add any kind of pornographic contents, as if I didn't add it too.</li>
+<li>Help them to get the logic of my code if they asked you.</li>
+<li>Don't just copy and paste, learn its logic too specially the flow of the code.</li>
+</ol>
 
--- Personal --
+</fieldset>
 
-1. Help others, for those who want to learn, and be a better coder and/or programmer, I wanna you to share your knowledge, this would be a great pleasure of mine.
-2. Never add and/or mention my name, from REAL ACCOUNT, up to DUMMIES, and also the HangDroid PH and MPOP Reverse II in any kind of platforms and media. Just give my name if they need help.
-3. Never give me any credits, instead do the first condition.
-4. Making me as an anonymous is a huge help for me, not to avoid them, but to avoid popularity.
-5. Thank me if you're done, or I'll helped you.
 
+<fieldset>
+<legend>Personal</legend>
+<ol>
+<li>Help others, for those who want to learn, and be a better coder and/or programmer, I wanna</li> you to share your knowledge, this would be a great pleasure of mine.
+<li>Never add and/or mention my name, from REAL ACCOUNT, up to DUMMIES, and also the HangDroid</li> PH and MPOP Reverse II in any kind of platforms and media. Just give my name if they need help.
+<li>Never give me any credits, instead do the first condition.</li>
+<li>Making me as an anonymous is a huge help for me, not to avoid them, but to avoid popularity.</li>
+<li>Thank me if you're done, or I'll helped you.</li>
+</ol>
+</fieldset>
+
+---
 ### Credits
 1. Savador
 2. John Jeremy Antiguo
