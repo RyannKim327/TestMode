@@ -22,9 +22,7 @@ module.exports = async (api, event, result) => {
         logs.error("Music Search", err);
         return null;
       });
-    console.log(data)
     api.editMessage(`INFO [${data.title}]: Song found`, msg.messageID);
-    logs.log("Music test", data);
     let trials = 1;
 
     if (data) {
@@ -33,15 +31,12 @@ module.exports = async (api, event, result) => {
         msg.messageID
       );
       const fetching = async () => {
-        logs.log("Music Trials", trials);
         axios
           .get(
              `https://kaiz-apis.gleeze.com/api/ytmp3-v2?url=${encodeURIComponent("https://youtube.com/watch?v=" + data.videoId)}&apikey=${process.env.KAIZAPI}`,
           )
           .then(res => {
             const newData = res.data;
-
-            logs.log("Fetch Music", newData);
             try {
               const filename = `${__dirname}/../temp/${event.senderID}_${event.threadID}.mp3`;
               const file = fs.createWriteStream(filename);
